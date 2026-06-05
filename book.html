@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Call — Lloyd & Co. AI Automation Consulting</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .expect-item { display:flex; align-items:flex-start; gap:1rem; margin-bottom:1.25rem; }
+    .expect-check { width:34px;height:34px;border-radius:50%;background:#E6F4EA;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px; }
+    .expect-check svg { width:16px;height:16px;stroke:#16A34A;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round; }
+    .expect-text { font-size:1rem;color:#334155;line-height:1.65; }
+    .booking-box { max-width:540px;margin:0 auto;background:#F8F9FA;border:2px dashed #CBD5E1;border-radius:18px;padding:3.5rem 2.5rem;text-align:center;transition:border-color 0.2s; }
+    .booking-box:hover { border-color:#94A3B8; }
+    .booking-box p { color:var(--muted);font-size:1rem;margin-bottom:1.75rem;line-height:1.65; }
+    .reassurance { text-align:center;font-size:0.88rem;color:var(--subtle);padding:1.25rem 0 4rem;font-style:italic; }
+    .stat-bar { display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 4px 20px rgba(0,0,0,0.05);max-width:680px;margin:0 auto; }
+    .stat-bar__item { padding:2rem 1.5rem;text-align:center;border-right:1px solid var(--border); }
+    .stat-bar__item:last-child { border-right:none; }
+    .stat-bar__num { font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;color:var(--navy);line-height:1;margin-bottom:0.35rem; }
+    .stat-bar__label { font-size:0.83rem;color:var(--muted);line-height:1.5; }
+  </style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+
+<div class="side-tabs">
+  <button class="side-tab" id="quizTabBtn" aria-label="AI Readiness Quiz">
+    <span class="side-tab__icon">⚡</span> Am I a fit? →
+  </button>
+  <button class="side-tab side-tab--automate" id="automateTab" aria-label="Submit automation request">
+    <span class="side-tab__icon">🔧</span> Automate This →
+  </button>
+</div>
+<div class="quiz-backdrop" id="quizBackdrop"></div>
+<aside class="quiz-drawer" id="quizDrawer" role="dialog" aria-modal="true">
+  <div class="quiz-drawer__header">
+    <span class="quiz-drawer__title">AI Readiness Quiz</span>
+    <button class="quiz-close-btn" id="quizClose">✕</button>
+  </div>
+  <div class="quiz-beam-wrap">
+    <div class="quiz-beam-label"><span>Progress</span><span id="beamLabel">0 / 6</span></div>
+    <div class="quiz-beam-track">
+      <div class="quiz-beam-seg"></div><div class="quiz-beam-seg"></div>
+      <div class="quiz-beam-seg"></div><div class="quiz-beam-seg"></div>
+      <div class="quiz-beam-seg"></div><div class="quiz-beam-seg"></div>
+    </div>
+  </div>
+  <div class="quiz-drawer__body" id="quizBody">
+    <p style="color:var(--muted);font-size:0.95rem;line-height:1.7;">Find out if AI can save your business 10+ hours a week. 6 quick questions.</p>
+  </div>
+  <div class="quiz-drawer__footer" id="quizFooter">
+    <button class="btn btn--primary" onclick="renderQ()">Start Quiz →</button>
+  </div>
+</aside>
+
+<!-- Automate drawer -->
+<div class="quiz-backdrop" id="automateBackdrop"></div>
+<aside class="automate-drawer" id="automateDrawer" role="dialog" aria-modal="true">
+  <div class="automate-drawer__header">
+    <div><div class="automate-drawer__title">Automate This</div><div class="automate-drawer__sub">Describe the process. We'll tell you if we can build it.</div></div>
+    <button class="quiz-close-btn" id="automateClose" style="background:rgba(255,255,255,0.12);">✕</button>
+  </div>
+  <div class="automate-drawer__body" id="automateBody">
+    <div class="automate-promise"><strong>Here's how this works:</strong> Describe any task, process, or workflow you wish ran automatically. We review every submission — if we can build it, we'll reach back with good news. If not, we'll still respond with specific suggestions.</div>
+    <div class="automate-form-group"><label>Your name</label><input type="text" id="aName" placeholder="First and last name" /></div>
+    <div class="automate-form-group"><label>Your email</label><input type="email" id="aEmail" placeholder="you@yourbusiness.com" /></div>
+    <div class="automate-form-group"><label>What do you want automated?</label><textarea id="aRequest" rows="5" placeholder="Describe the task or process…"></textarea></div>
+  </div>
+  <div class="automate-drawer__footer">
+    <p style="font-size:0.75rem;color:var(--subtle);margin-bottom:0.75rem;font-style:italic;">We respond to all submissions — even if the answer is 'not us.'</p>
+    <button class="btn btn--primary" style="width:100%;justify-content:center;" onclick="automateSubmit()">Submit My Request →</button>
+  </div>
+</aside>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <img src="lloyd-co-logo-navy.png" alt="Lloyd & Co." onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+      <span class="nav__logo-text" style="display:none;">Lloyd &amp; Co.</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="submit.html">Submit a Job</a></li>
+      <li><a href="book.html">Book a Call</a></li>
+    </ul>
+    <a href="book.html" class="btn btn--primary nav__cta">Book Free Audit</a>
+    <button class="nav__hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav__mobile" id="mobileNav">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="submit.html">Submit a Job</a><a href="book.html">Book a Call</a>
+    <a href="book.html" class="btn btn--primary" style="text-align:center;">Book Free Audit</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="min-height:52vh;padding:5rem 0 4rem;">
+  <svg id="blueprint-svg" aria-hidden="true"></svg>
+  <div class="hero__content container">
+    <div class="hero__badge">Free · 30 Minutes · No Obligation</div>
+    <h1 class="hero__title" style="font-size:clamp(2.4rem,5vw,3.8rem);">
+      Book Your <em>Free AI Audit</em>
+    </h1>
+    <p class="hero__sub">30 minutes. No pitch. Just a clear picture of what AI could do for your business — and exactly what it would take to get there.</p>
+  </div>
+</section>
+
+<!-- WHAT TO EXPECT -->
+<section class="section section--gray skew-top">
+  <div class="container">
+    <div class="text-center fade-in" style="margin-bottom:2.5rem;">
+      <span class="section-label">What to Expect</span>
+      <h2 class="section-title">Here's how the call goes</h2>
+    </div>
+    <div style="max-width:540px;margin:0 auto;" class="fade-in fade-in-delay-1">
+      <div class="expect-item">
+        <div class="expect-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <p class="expect-text"><strong>We learn how your business actually operates</strong> — not a generic overview. We'll ask specific questions about where your team's time goes and what tools you're working with.</p>
+      </div>
+      <div class="expect-item">
+        <div class="expect-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <p class="expect-text"><strong>We identify 3 specific tasks you're doing manually that AI could handle</strong> — ranked by impact and effort, so you know exactly what to tackle first.</p>
+      </div>
+      <div class="expect-item">
+        <div class="expect-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <p class="expect-text"><strong>You leave with a clear picture of what's possible and what it would cost</strong> — no vague proposals, no hidden pricing, no pressure to move forward.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="section">
+  <div class="container">
+    <div class="text-center fade-in" style="margin-bottom:2.5rem;">
+      <span class="section-label">Schedule Your Call</span>
+      <h2 class="section-title">Let's find a time</h2>
+    </div>
+    <div class="booking-box fade-in fade-in-delay-1">
+      <svg viewBox="0 0 24 24" style="width:44px;height:44px;stroke:#BFDBFE;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 1.25rem;">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+      </svg>
+      <p>Online scheduling is coming soon. In the meantime, reach out directly — we typically respond within a few hours.</p>
+      <a href="mailto:liam@lloydco.xyz?subject=Free%20AI%20Audit%20Request&body=Hi%20Liam%2C%0A%0AI'd%20like%20to%20book%20a%20free%20AI%20Audit.%20Here%27s%20a%20bit%20about%20my%20business%3A%0A%0A" class="btn btn--primary btn--lg">Email to Book Your Call →</a>
+      <p style="font-size:0.84rem;color:var(--subtle);margin-top:1.25rem;margin-bottom:0;">Or write directly to <a href="mailto:liam@lloydco.xyz" style="color:var(--blue);">liam@lloydco.xyz</a></p>
+    </div>
+    <p class="reassurance fade-in fade-in-delay-2">No sales pressure. No 6-month contracts. If we're not the right fit, we'll tell you.</p>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<section class="section--gray skew-both" style="padding:3.5rem 0;">
+  <div class="container">
+    <p style="text-align:center;font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--subtle);margin-bottom:2rem;" class="fade-in">What happens after you book</p>
+    <div class="stat-bar fade-in fade-in-delay-1">
+      <div class="stat-bar__item">
+        <div class="stat-bar__num">24h</div>
+        <p class="stat-bar__label">We confirm your call and send a short intake form within 24 hours.</p>
+      </div>
+      <div class="stat-bar__item">
+        <div class="stat-bar__num">30m</div>
+        <p class="stat-bar__label">A focused call built around your operation — not a generic script.</p>
+      </div>
+      <div class="stat-bar__item">
+        <div class="stat-bar__num">3</div>
+        <p class="stat-bar__label">Specific automation opportunities you leave with, ranked and ready.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__logo">
+          <img src="lloyd-co-logo-transparent.png" alt="Lloyd & Co." style="height:50px;width:auto;" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+          <span class="footer__logo-text" style="display:none;">Lloyd &amp; Co.</span>
+        </div>
+        <p class="footer__tagline">AI automation consulting for real estate and construction operators in Indianapolis and beyond.</p>
+      </div>
+      <div>
+        <p class="footer__heading">Navigation</p>
+        <ul class="footer__links">
+          <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="book.html">Book a Call</a></li>
+        </ul>
+      </div>
+      <div class="footer__contact">
+        <p class="footer__heading">Contact</p>
+        <p>Carmel, Indiana</p>
+        <p><a href="mailto:liam@lloydco.xyz">liam@lloydco.xyz</a></p>
+        <p style="margin-top:0.75rem;"><a href="#" style="color:#334155;">LinkedIn ↗</a></p>
+      </div>
+    </div>
+    <hr class="footer__divider" />
+    <div class="footer__bottom">
+      <span>&copy; 2026 Lloyd &amp; Co. All rights reserved.</span>
+      <span style="color:#1E3A5F;">Carmel, Indiana</span>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+function automateSubmit() {
+  const name = document.getElementById('aName')?.value?.trim();
+  const email = document.getElementById('aEmail')?.value?.trim();
+  const request = document.getElementById('aRequest')?.value?.trim();
+  if (!name || !email || !request) { alert('Please fill in name, email, and what you want automated.'); return; }
+  document.getElementById('automateBody').innerHTML = `<div style="text-align:center;padding:2rem 0;"><div style="font-size:2.5rem;margin-bottom:1rem;">✓</div><h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--navy);margin-bottom:0.75rem;">Request received.</h3><p style="font-size:0.92rem;color:#334155;line-height:1.75;">We'll review and get back to you at <strong>${email}</strong>.</p></div>`;
+  document.querySelector('.automate-drawer__footer').innerHTML = '';
+}
+</script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Lloyd & Co. AI Automation Consulting</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+
+<div class="side-tabs">
+  <button class="side-tab" id="quizTabBtn" aria-label="AI Readiness Quiz">
+    <span class="side-tab__icon">⚡</span> Am I a fit? →
+  </button>
+  <button class="side-tab side-tab--automate" id="automateTab" aria-label="Submit automation request">
+    <span class="side-tab__icon">🔧</span> Automate This →
+  </button>
+</div>
+<div class="quiz-backdrop" id="quizBackdrop"></div>
+<aside class="quiz-drawer" id="quizDrawer" role="dialog" aria-modal="true">
+  <div class="quiz-drawer__header">
+    <span class="quiz-drawer__title">AI Readiness Quiz</span>
+    <button class="quiz-close-btn" id="quizClose">✕</button>
+  </div>
+  <div class="quiz-beam-wrap">
+    <div class="quiz-beam-label"><span>Progress</span><span id="beamLabel">0 / 6</span></div>
+    <div class="quiz-beam-track">
+      <div class="quiz-beam-seg"></div><div class="quiz-beam-seg"></div>
+      <div class="quiz-beam-seg"></div><div class="quiz-beam-seg"></div>
+      <div class="quiz-beam-seg"></div><div class="quiz-beam-seg"></div>
+    </div>
+  </div>
+  <div class="quiz-drawer__body" id="quizBody">
+    <p style="color:var(--muted);font-size:0.95rem;line-height:1.7;">Find out if AI can save your business 10+ hours a week. 6 quick questions.</p>
+  </div>
+  <div class="quiz-drawer__footer" id="quizFooter">
+    <button class="btn btn--primary" onclick="renderQ()">Start Quiz →</button>
+  </div>
+</aside>
+
+<!-- Automate drawer -->
+<div class="quiz-backdrop" id="automateBackdrop"></div>
+<aside class="automate-drawer" id="automateDrawer" role="dialog" aria-modal="true">
+  <div class="automate-drawer__header">
+    <div><div class="automate-drawer__title">Automate This</div><div class="automate-drawer__sub">Describe the process. We'll tell you if we can build it.</div></div>
+    <button class="quiz-close-btn" id="automateClose" style="background:rgba(255,255,255,0.12);">✕</button>
+  </div>
+  <div class="automate-drawer__body" id="automateBody">
+    <div class="automate-promise"><strong>Here's how this works:</strong> Describe any task, process, or workflow you wish ran automatically. We review every submission — if we can build it, we'll reach back with good news. If not, we'll still respond with specific suggestions.</div>
+    <div class="automate-form-group"><label>Your name</label><input type="text" id="aName" placeholder="First and last name" /></div>
+    <div class="automate-form-group"><label>Your email</label><input type="email" id="aEmail" placeholder="you@yourbusiness.com" /></div>
+    <div class="automate-form-group"><label>What do you want automated?</label><textarea id="aRequest" rows="5" placeholder="Describe the task or process…"></textarea></div>
+  </div>
+  <div class="automate-drawer__footer">
+    <p style="font-size:0.75rem;color:var(--subtle);margin-bottom:0.75rem;font-style:italic;">We respond to all submissions — even if the answer is 'not us.'</p>
+    <button class="btn btn--primary" style="width:100%;justify-content:center;" onclick="automateSubmit()">Submit My Request →</button>
+  </div>
+</aside>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <img src="lloyd-co-logo-navy.png" alt="Lloyd & Co." onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+      <span class="nav__logo-text" style="display:none;">Lloyd &amp; Co.</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="submit.html">Submit a Job</a></li>
+      <li><a href="book.html">Book a Call</a></li>
+    </ul>
+    <a href="book.html" class="btn btn--primary nav__cta">Book Free Audit</a>
+    <button class="nav__hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav__mobile" id="mobileNav">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="submit.html">Submit a Job</a><a href="book.html">Book a Call</a>
+    <a href="book.html" class="btn btn--primary" style="text-align:center;">Book Free Audit</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="hero" style="min-height:52vh;padding:5rem 0 4rem;">
+  <svg id="blueprint-svg" aria-hidden="true"></svg>
+  <div class="hero__content container">
+    <div class="hero__badge">The Team</div>
+    <h1 class="hero__title" style="font-size:clamp(2.2rem,4.5vw,3.6rem);">
+      Built by operators.<br>For <em>operators.</em>
+    </h1>
+    <p class="hero__sub" style="max-width:560px;margin:0 auto;">
+      After working inside multiple real estate and construction companies, one thing was impossible to ignore: the most skilled operators in the room were spending hours every week doing work that a computer could handle in seconds.
+    </p>
+  </div>
+</section>
+
+<!-- TEAM GRID -->
+<section class="section">
+  <div class="container">
+    <div class="text-center fade-in" style="margin-bottom:2.5rem;">
+      <span class="section-label">The People Behind Lloyd &amp; Co.</span>
+      <h2 class="section-title">Operators, engineers, and business leaders</h2>
+      <p class="section-sub" style="margin:0 auto;">Lloyd &amp; Co. exists to fix the manual work problem — backed by a team that has built and scaled real companies. <strong>Hover or tap a card to read their full bio.</strong></p>
+    </div>
+
+    <div class="team-grid">
+
+      <!-- Liam -->
+      <div class="flip-card fade-in fade-in-delay-1" tabindex="0" role="button" aria-label="Liam Lloyd - click to see bio">
+        <div class="flip-card__inner">
+          <div class="flip-card__front">
+            <div class="flip-card__photo">
+              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span style="font-size:0.75rem;">Photo coming soon</span>
+            </div>
+            <div class="flip-card__info">
+              <p class="flip-card__name">Liam Lloyd</p>
+              <span class="role-badge role-badge--founder">Founder</span>
+              <p class="flip-card__company" style="margin-top:0.5rem;">Lloyd &amp; Co.</p>
+            </div>
+          </div>
+          <div class="flip-card__back">
+            <p class="flip-card__name">Liam Lloyd</p>
+            <span class="role-badge role-badge--founder">Founder</span>
+            <p class="flip-card__bio">A Finance and Economics student at Butler University and Microsoft Azure AI Fundamentals certified, Liam has built and deployed real automation systems inside active construction and real estate operations — reducing administrative labor by over 70% on documented projects. Before Lloyd &amp; Co., he founded Red Applications LLC, a software company serving K–12 schools, where he led a team of 8 and generated $20K in revenue before his sophomore year. Bilingual in English and Spanish. Based in Carmel, Indiana.</p>
+            <p class="flip-hint">← tap to flip back</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thomas -->
+      <div class="flip-card fade-in fade-in-delay-2" tabindex="0" role="button">
+        <div class="flip-card__inner">
+          <div class="flip-card__front">
+            <div class="flip-card__photo"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span style="font-size:0.75rem;">Photo coming soon</span></div>
+            <div class="flip-card__info">
+              <p class="flip-card__name">Thomas Lloyd</p>
+              <span class="role-badge role-badge--advisor">Board Advisor</span>
+              <p class="flip-card__company" style="margin-top:0.5rem;">CEO &amp; Founder, Top Mexico Real Estate</p>
+            </div>
+          </div>
+          <div class="flip-card__back">
+            <p class="flip-card__name">Thomas Lloyd</p>
+            <span class="role-badge role-badge--advisor">Board Advisor</span>
+            <p class="flip-card__bio">A Purdue University graduate operating in Mexico's real estate market since 1995 — the first person to obtain Mexico's nationally regulated real estate professional license. Built one of the leading international real estate platforms in the Riviera Maya, serving hundreds of U.S. and Canadian buyers. Decades of experience building and scaling real estate businesses internationally.</p>
+            <p class="flip-hint">← tap to flip back</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Beatriz -->
+      <div class="flip-card fade-in fade-in-delay-3" tabindex="0" role="button">
+        <div class="flip-card__inner">
+          <div class="flip-card__front">
+            <div class="flip-card__photo"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span style="font-size:0.75rem;">Photo coming soon</span></div>
+            <div class="flip-card__info">
+              <p class="flip-card__name">Beatriz Lozano</p>
+              <span class="role-badge role-badge--advisor">Board Advisor</span>
+              <p class="flip-card__company" style="margin-top:0.5rem;">Founder &amp; CEO, The Red Search</p>
+            </div>
+          </div>
+          <div class="flip-card__back">
+            <p class="flip-card__name">Beatriz Lozano</p>
+            <span class="role-badge role-badge--advisor">Board Advisor</span>
+            <p class="flip-card__bio">Systems Engineer with an MBA from ITAM. Architected the digital infrastructure and operational systems behind Top Mexico Real Estate's growth. Founded The Red Search to bring those same systems to other businesses. Deep expertise in technology strategy, business operations, and scalable digital workflows.</p>
+            <p class="flip-hint">← tap to flip back</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jason -->
+      <div class="flip-card fade-in fade-in-delay-1" tabindex="0" role="button">
+        <div class="flip-card__inner">
+          <div class="flip-card__front">
+            <div class="flip-card__photo"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span style="font-size:0.75rem;">Photo coming soon</span></div>
+            <div class="flip-card__info">
+              <p class="flip-card__name">Jason Stockrahm</p>
+              <span class="role-badge role-badge--advisor">Board Advisor</span>
+              <p class="flip-card__company" style="margin-top:0.5rem;">VP, ENTRUST Solutions Group</p>
+            </div>
+          </div>
+          <div class="flip-card__back">
+            <p class="flip-card__name">Jason Stockrahm</p>
+            <span class="role-badge role-badge--advisor">Board Advisor</span>
+            <p class="flip-card__bio">Over 20 years in consulting, 13+ years leading large-scale engineering and operations projects across the U.S. Licensed Professional Engineer, Civil Engineering graduate of Valparaiso University. Joined ENTRUST when it was a 150-person firm and helped scale it into a national operation. Brings rigorous systems thinking and enterprise-level consulting expertise.</p>
+            <p class="flip-hint">← tap to flip back</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nick -->
+      <div class="flip-card fade-in fade-in-delay-2" tabindex="0" role="button">
+        <div class="flip-card__inner">
+          <div class="flip-card__front">
+            <div class="flip-card__photo"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span style="font-size:0.75rem;">Photo coming soon</span></div>
+            <div class="flip-card__info">
+              <p class="flip-card__name">Nick Smarrelli</p>
+              <span class="role-badge role-badge--advisor">Board Advisor</span>
+              <p class="flip-card__company" style="margin-top:0.5rem;">CEO, GadellNet · Professor, Butler University</p>
+            </div>
+          </div>
+          <div class="flip-card__back">
+            <p class="flip-card__name">Nick Smarrelli</p>
+            <span class="role-badge role-badge--advisor">Board Advisor</span>
+            <p class="flip-card__bio">One of Indianapolis's most connected technology operators. Led GadellNet to the Inc. 5000 eight times. Named to IBJ's Forty Under 40. Founded Ryvit, a construction tech platform that raised $2M+. Professor of Entrepreneurship and Organizational Behavior at Butler University. Active investor and advisor through FivePeaks.</p>
+            <p class="flip-hint">← tap to flip back</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- John -->
+      <div class="flip-card fade-in fade-in-delay-3" tabindex="0" role="button">
+        <div class="flip-card__inner">
+          <div class="flip-card__front">
+            <div class="flip-card__photo"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span style="font-size:0.75rem;">Photo coming soon</span></div>
+            <div class="flip-card__info">
+              <p class="flip-card__name">John Moore</p>
+              <span class="role-badge role-badge--advisor">Board Advisor</span>
+              <p class="flip-card__company" style="margin-top:0.5rem;">CEO, Moore Consulting</p>
+            </div>
+          </div>
+          <div class="flip-card__back">
+            <p class="flip-card__name">John Moore</p>
+            <span class="role-badge role-badge--advisor">Board Advisor</span>
+            <p class="flip-card__bio">MBA from Saint Joseph's University, doctorate in progress at Ball State. CEO of Moore Consulting. Business Department Lead and Entrepreneurship teacher at Westfield Washington Schools — leads the Shark Tank Club and Rock Shop. Innovation Coach at STARTedUP Foundation. 13+ years of business development and sales leadership.</p>
+            <p class="flip-hint">← tap to flip back</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- DARK CTA -->
+<section class="cta-dark">
+  <div class="container fade-in">
+    <h2 class="cta-dark__title">Ready to stop doing this manually?</h2>
+    <p class="cta-dark__sub">Book a free 30-minute AI Audit. We'll identify 3 specific things you could automate this month.</p>
+    <a href="book.html" class="btn btn--blue btn--lg">Book Free Audit →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__logo">
+          <img src="lloyd-co-logo-transparent.png" alt="Lloyd & Co." style="height:50px;width:auto;" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+          <span class="footer__logo-text" style="display:none;">Lloyd &amp; Co.</span>
+        </div>
+        <p class="footer__tagline">AI automation consulting for real estate and construction operators in Indianapolis and beyond.</p>
+      </div>
+      <div>
+        <p class="footer__heading">Navigation</p>
+        <ul class="footer__links">
+          <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="book.html">Book a Call</a></li>
+        </ul>
+      </div>
+      <div class="footer__contact">
+        <p class="footer__heading">Contact</p>
+        <p>Carmel, Indiana</p>
+        <p><a href="mailto:liam@lloydco.xyz">liam@lloydco.xyz</a></p>
+        <p style="margin-top:0.75rem;"><a href="#" style="color:#334155;">LinkedIn ↗</a></p>
+      </div>
+    </div>
+    <hr class="footer__divider" />
+    <div class="footer__bottom">
+      <span>&copy; 2026 Lloyd &amp; Co. All rights reserved.</span>
+      <span style="color:#1E3A5F;">Carmel, Indiana</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function automateSubmit() {
+  const name = document.getElementById("aName")?.value?.trim();
+  const email = document.getElementById("aEmail")?.value?.trim();
+  const request = document.getElementById("aRequest")?.value?.trim();
+  if (!name || !email || !request) { alert("Please fill in name, email, and what you want automated."); return; }
+  document.getElementById("automateBody").innerHTML = `<div style="text-align:center;padding:2rem 0;"><div style="font-size:2.5rem;margin-bottom:1rem;">✓</div><h3 style="font-family:Cormorant Garamond,serif;font-size:1.4rem;font-weight:700;color:var(--navy);margin-bottom:0.75rem;">Request received.</h3><p style="font-size:0.92rem;color:#334155;line-height:1.75;">We will review and get back to you at <strong>${email}</strong>.</p></div>`;
+  document.querySelector(".automate-drawer__footer").innerHTML = "";
+}
+</script>
+<script src="script.js"></script>
+</body>
+</html>

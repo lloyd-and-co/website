@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submit a Job — Lloyd & Co. AI Automation Consulting</title>
+  <meta name="description" content="Describe any task or workflow you want automated. We review every submission and respond either way — even if it means pointing you somewhere else." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .submit-layout { display: grid; grid-template-columns: 1fr 420px; gap: 4rem; align-items: start; max-width: 1000px; margin: 0 auto; }
+    .submit-form-card { background: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem 2.25rem; box-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 20px 60px rgba(0,0,0,0.07); }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.25rem; }
+    .form-group label { font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; color: var(--navy); letter-spacing: 0.02em; }
+    .form-group input, .form-group select, .form-group textarea { padding: 0.88rem 1rem; border: 1.5px solid var(--border); border-radius: 9px; font-family: 'Inter', sans-serif; font-size: 0.93rem; color: var(--text); outline: none; transition: border-color 0.18s, box-shadow 0.18s; background: #fff; width: 100%; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #1E3A8A; box-shadow: 0 0 0 3px rgba(30,58,138,0.1); }
+    .form-group textarea { resize: vertical; min-height: 160px; line-height: 1.7; }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: var(--subtle); }
+    .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394A3B8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; cursor: pointer; }
+    .form-divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
+    .form-note { font-size: 0.8rem; color: var(--subtle); font-style: italic; line-height: 1.55; }
+    .promise-box { background: #EEF2FF; border: 1px solid #C7D2FE; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; }
+    .promise-box h4 { font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 700; color: #1E3A8A; margin-bottom: 0.6rem; }
+    .promise-box p { font-size: 0.88rem; color: #3730A3; line-height: 1.7; }
+    .sidebar-block { margin-bottom: 2rem; }
+    .sidebar-block h3 { font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 0.75rem; }
+    .sidebar-block p { font-size: 0.9rem; color: var(--muted); line-height: 1.72; margin-bottom: 0.5rem; }
+    .example-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.75rem; }
+    .example-list li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.88rem; color: #334155; line-height: 1.6; }
+    .example-list li::before { content: '"'; color: var(--navy); font-weight: 700; font-size: 1rem; flex-shrink: 0; }
+    .example-list li::after { content: '"'; color: var(--navy); font-weight: 700; font-size: 1rem; }
+    .outcome-cards { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem; }
+    .outcome-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.1rem; }
+    .outcome-card__icon { font-size: 1.1rem; margin-bottom: 0.3rem; }
+    .outcome-card__title { font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--navy); margin-bottom: 0.2rem; }
+    .outcome-card__desc { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+    .success-msg { text-align: center; padding: 3rem 2rem; }
+    .success-msg__icon { font-size: 3rem; margin-bottom: 1.25rem; }
+    .success-msg h2 { font-size: 1.8rem; font-weight: 700; color: var(--navy); margin-bottom: 0.75rem; }
+    .success-msg p { font-size: 1rem; color: var(--muted); line-height: 1.75; max-width: 400px; margin: 0 auto 1.5rem; }
+    @media (max-width: 860px) { .submit-layout { grid-template-columns: 1fr; gap: 2rem; } }
+  </style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- Side tabs on this page too -->
+<div class="side-tabs">
+  <button class="side-tab" id="quizTabBtn" aria-label="AI Readiness Quiz">
+    <span class="side-tab__icon">⚡</span> Am I a fit? →
+  </button>
+  <button class="side-tab side-tab--automate" id="automateTab" aria-label="Submit an automation request">
+    <span class="side-tab__icon">🔧</span> Automate This →
+  </button>
+</div>
+
+<!-- Quiz drawer -->
+<div class="quiz-backdrop" id="quizBackdrop"></div>
+<aside class="quiz-drawer" id="quizDrawer" role="dialog" aria-modal="true">
+  <div class="quiz-drawer__header"><span class="quiz-drawer__title">AI Readiness Quiz</span><button class="quiz-close-btn" id="quizClose">✕</button></div>
+  <div class="quiz-beam-wrap"><div class="quiz-beam-label"><span>Progress</span><span id="beamLabel">0 / 6</span></div><div class="quiz-beam-track"><div class="quiz-beam-seg"></div><div class="quiz-beam-seg"></div><div class="quiz-beam-seg"></div><div class="quiz-beam-seg"></div><div class="quiz-beam-seg"></div><div class="quiz-beam-seg"></div></div></div>
+  <div class="quiz-drawer__body" id="quizBody"><p style="color:var(--muted);font-size:0.95rem;line-height:1.7;">Find out if AI can save your business 10+ hours a week. 6 quick questions.</p></div>
+  <div class="quiz-drawer__footer" id="quizFooter"><button class="btn btn--primary" onclick="renderQ()">Start Quiz →</button></div>
+</aside>
+
+<!-- Automate drawer -->
+<div class="quiz-backdrop" id="automateBackdrop"></div>
+<aside class="automate-drawer" id="automateDrawer" role="dialog" aria-modal="true">
+  <div class="automate-drawer__header">
+    <div><div class="automate-drawer__title">Automate This</div><div class="automate-drawer__sub">Describe the process. We'll tell you if we can build it.</div></div>
+    <button class="quiz-close-btn" id="automateClose" style="background:rgba(255,255,255,0.12);">✕</button>
+  </div>
+  <div class="automate-drawer__body" id="automateBody">
+    <div class="automate-promise"><strong>Here's how this works:</strong>Describe any task, process, or workflow you wish ran automatically. We review every submission personally — if it's something we can build, we'll reach back with good news. If it's outside our scope, we'll still respond with specific suggestions.</div>
+    <div class="automate-form-group"><label>Your name</label><input type="text" id="aName" placeholder="First and last name" /></div>
+    <div class="automate-form-group"><label>Your email</label><input type="email" id="aEmail" placeholder="you@yourbusiness.com" /></div>
+    <div class="automate-form-group"><label>What type of business?</label><select id="aIndustry"><option value="" disabled selected>Select your industry</option><option>Real Estate (Sales / Brokerage)</option><option>Real Estate (Property Management)</option><option>Residential Construction</option><option>Commercial Construction</option><option>Law Firm</option><option>Accounting / Financial Services</option><option>Independent Contractor / Trades</option><option>Med Spa / Healthcare</option><option>Other</option></select></div>
+    <div class="automate-form-group"><label>What do you want automated?</label><textarea id="aRequest" rows="5" placeholder="Describe the task, process, or problem…"></textarea></div>
+  </div>
+  <div class="automate-drawer__footer">
+    <p style="font-size:0.75rem;color:var(--subtle);margin-bottom:0.75rem;font-style:italic;">We respond to all submissions — even if the answer is 'not us.'</p>
+    <button class="btn btn--primary" style="width:100%;justify-content:center;" onclick="automateSubmit()">Submit My Request →</button>
+  </div>
+</aside>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <img src="lloyd-co-logo-navy.png" alt="Lloyd & Co." onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+      <span class="nav__logo-text" style="display:none;">Lloyd &amp; Co.</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="submit.html">Submit a Job</a></li>
+      <li><a href="book.html">Book a Call</a></li>
+    </ul>
+    <a href="book.html" class="btn btn--primary nav__cta">Book Free Audit</a>
+    <button class="nav__hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav__mobile" id="mobileNav">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="submit.html">Submit a Job</a><a href="book.html">Book a Call</a>
+    <a href="book.html" class="btn btn--primary" style="text-align:center;">Book Free Audit</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="min-height:48vh;padding:5rem 0 4rem;">
+  <svg id="blueprint-svg" aria-hidden="true"></svg>
+  <div class="hero__content container">
+    <div class="hero__badge">Open Submissions</div>
+    <h1 class="hero__title" style="font-size:clamp(2.4rem,5vw,3.8rem);">
+      Got a process<br>that should run <em>itself?</em>
+    </h1>
+    <p class="hero__sub">Describe it. We'll tell you if we can build it — and if we can't, we'll tell you who can.</p>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<section class="section" style="padding-top:4rem;">
+  <div class="container">
+    <div class="submit-layout">
+
+      <!-- Form -->
+      <div>
+        <div class="submit-form-card" id="formCard">
+          <h2 style="font-size:1.6rem;font-weight:700;color:var(--navy);margin-bottom:0.35rem;">Submit Your Request</h2>
+          <p style="font-size:0.88rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.6;">Tell us about the task, process, or headache you want solved. Be as specific or as vague as you want — we'll figure out the rest.</p>
+
+          <div class="promise-box">
+            <h4>What happens with your submission</h4>
+            <p>We review every request personally. If it's something we can build — we'll reach back with good news and a clear picture of what it would take. If it's outside our scope, we'll still respond with specific suggestions for what to do and who can help. Either way, you hear from us.</p>
+          </div>
+
+          <div class="form-group">
+            <label for="sName">Your name *</label>
+            <input type="text" id="sName" placeholder="First and last name" autocomplete="name" />
+          </div>
+
+          <div class="form-group">
+            <label for="sEmail">Your email *</label>
+            <input type="email" id="sEmail" placeholder="you@yourbusiness.com" autocomplete="email" />
+          </div>
+
+          <div class="form-group">
+            <label for="sIndustry">What type of business are you running?</label>
+            <select id="sIndustry">
+              <option value="" disabled selected>Select your industry</option>
+              <option>Real Estate (Sales / Brokerage)</option>
+              <option>Real Estate (Property Management)</option>
+              <option>Residential Construction</option>
+              <option>Commercial Construction</option>
+              <option>Law Firm</option>
+              <option>Accounting / Financial Services</option>
+              <option>Independent Contractor / Trades</option>
+              <option>Med Spa / Healthcare</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="sTools">What tools does your team use? <span style="font-weight:400;color:var(--subtle);">(optional)</span></label>
+            <input type="text" id="sTools" placeholder="e.g. Buildertrend, QuickBooks, HubSpot, Excel…" />
+          </div>
+
+          <div class="form-divider"></div>
+
+          <div class="form-group">
+            <label for="sRequest">What do you want automated? *</label>
+            <textarea id="sRequest" rows="7" placeholder="Describe the task, process, or workflow. For example: 'Every time we get a new lead from our website, someone manually copies it into our CRM, sends an intro email, and adds a follow-up reminder. It takes about 20 minutes per lead and we get 15–20 a week…'"></textarea>
+            <p class="form-note">More detail helps us give you a more specific answer. But even a sentence is enough to start.</p>
+          </div>
+
+          <div class="form-group">
+            <label for="sHours">Roughly how many hours per week does this take right now? <span style="font-weight:400;color:var(--subtle);">(optional)</span></label>
+            <select id="sHours">
+              <option value="" disabled selected>Select a range</option>
+              <option>Less than 2 hours</option>
+              <option>2–5 hours</option>
+              <option>5–10 hours</option>
+              <option>More than 10 hours</option>
+              <option>Not sure</option>
+            </select>
+          </div>
+
+          <button class="btn btn--primary btn--lg" style="width:100%;justify-content:center;margin-top:0.5rem;" onclick="submitJob()">Submit My Request →</button>
+          <p class="form-note" style="text-align:center;margin-top:1rem;">We respond to every submission — whether we can help or not.</p>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="fade-in">
+        <div class="sidebar-block">
+          <h3>What kinds of things can you submit?</h3>
+          <p>Anything that feels manual, repetitive, or like it should already happen automatically. Here are the kinds of things people submit:</p>
+          <ul class="example-list">
+            <li>We copy leads from our website into our CRM by hand every morning</li>
+            <li>After every client meeting I spend an hour writing up notes and action items</li>
+            <li>We have to manually pull a status report every Friday from three different tools</li>
+            <li>Scheduling subcontractors requires 20 phone calls every week</li>
+            <li>We review the same 4 documents manually before every project kicks off</li>
+          </ul>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <div class="sidebar-block">
+          <h3>What you get back</h3>
+          <div class="outcome-cards">
+            <div class="outcome-card">
+              <div class="outcome-card__icon">✅</div>
+              <div class="outcome-card__title">If we can build it</div>
+              <div class="outcome-card__desc">We'll reach back with good news — what we'd build, how it would work, and what it would cost. No commitment required.</div>
+            </div>
+            <div class="outcome-card">
+              <div class="outcome-card__icon">↗️</div>
+              <div class="outcome-card__title">If it's outside our scope</div>
+              <div class="outcome-card__desc">We'll still respond with specific recommendations — what category of solution fits your problem and who's better positioned to help. We'd rather point you right than leave you hanging.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <div class="sidebar-block">
+          <p style="font-size:0.88rem;color:var(--muted);">Prefer to talk through it directly?</p>
+          <a href="book.html" class="btn btn--outline" style="margin-top:0.5rem;">Book a Free Audit Call →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__logo"><img src="lloyd-co-logo-transparent.png" alt="Lloyd & Co." style="height:50px;width:auto;" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" /><span class="footer__logo-text" style="display:none;">Lloyd &amp; Co.</span></div>
+        <p class="footer__tagline">AI automation consulting for real estate, construction, and professional services operators in Indianapolis and beyond.</p>
+      </div>
+      <div>
+        <p class="footer__heading">Navigation</p>
+        <ul class="footer__links">
+          <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+          <li><a href="submit.html">Submit a Job</a></li><li><a href="book.html">Book a Call</a></li>
+        </ul>
+      </div>
+      <div class="footer__contact">
+        <p class="footer__heading">Contact</p>
+        <p>Carmel, Indiana</p>
+        <p><a href="mailto:liam@lloydco.xyz">liam@lloydco.xyz</a></p>
+        <p style="margin-top:0.75rem;"><a href="#" style="color:#334155;">LinkedIn ↗</a></p>
+      </div>
+    </div>
+    <hr class="footer__divider" />
+    <div class="footer__bottom">
+      <span>&copy; 2026 Lloyd &amp; Co. All rights reserved.</span>
+      <span style="color:#1E3A5F;">Carmel, Indiana</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function submitJob() {
+  const name    = document.getElementById('sName')?.value?.trim();
+  const email   = document.getElementById('sEmail')?.value?.trim();
+  const request = document.getElementById('sRequest')?.value?.trim();
+  if (!name || !email || !request) { alert('Please fill in your name, email, and describe what you want automated.'); return; }
+  document.getElementById('formCard').innerHTML = `
+    <div class="success-msg">
+      <div class="success-msg__icon">✓</div>
+      <h2>Request received.</h2>
+      <p>We'll review your submission and get back to you at <strong>${email}</strong>. Whether we can build it or not — you'll hear from us.</p>
+      <a href="index.html" class="btn btn--outline">Back to Home</a>
+    </div>`;
+}
+
+function automateSubmit() {
+  const name = document.getElementById('aName')?.value?.trim();
+  const email = document.getElementById('aEmail')?.value?.trim();
+  const request = document.getElementById('aRequest')?.value?.trim();
+  if (!name || !email || !request) { alert('Please fill in name, email, and describe what you want automated.'); return; }
+  document.getElementById('automateBody').innerHTML = `<div style="text-align:center;padding:2rem 0;"><div style="font-size:2.5rem;margin-bottom:1rem;">✓</div><h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--navy);margin-bottom:0.75rem;">Request received.</h3><p style="font-size:0.94rem;color:#334155;line-height:1.75;max-width:320px;margin:0 auto;">We'll review and get back to you at <strong>${email}</strong>.</p></div>`;
+  document.querySelector('.automate-drawer__footer').innerHTML = '';
+}
+
+document.getElementById('quizTabBtn')?.addEventListener('click', () => {
+  document.getElementById('quizDrawer').classList.add('open');
+  document.getElementById('quizBackdrop').classList.add('open');
+  document.body.style.overflow = 'hidden'; renderQ();
+});
+document.getElementById('quizClose')?.addEventListener('click', () => {
+  document.getElementById('quizDrawer').classList.remove('open');
+  document.getElementById('quizBackdrop').classList.remove('open');
+  document.body.style.overflow = '';
+});
+document.getElementById('quizBackdrop')?.addEventListener('click', () => {
+  document.getElementById('quizDrawer').classList.remove('open');
+  document.getElementById('quizBackdrop').classList.remove('open');
+  document.body.style.overflow = '';
+});
+</script>
+<script src="script.js"></script>
+</body>
+</html>
