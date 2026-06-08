@@ -113,6 +113,10 @@
           <div class="team-member__name">Liam Lloyd</div>
           <div class="team-member__role">Founder</div>
         </div>
+        <div class="team-member" data-member="nick" style="cursor:pointer;">
+          <div class="team-member__name">Nick Smarrelli</div>
+          <div class="team-member__role">Board Advisor</div>
+        </div>
         <div class="team-member" data-member="thomas" style="cursor:pointer;">
           <div class="team-member__name">Thomas Lloyd</div>
           <div class="team-member__role">Board Advisor</div>
@@ -125,70 +129,31 @@
           <div class="team-member__name">Jason Stockrahm</div>
           <div class="team-member__role">Board Advisor</div>
         </div>
-        <div class="team-member" data-member="nick" style="cursor:pointer;">
-          <div class="team-member__name">Nick Smarrelli</div>
-          <div class="team-member__role">Board Advisor</div>
-        </div>
         <div class="team-member" data-member="john" style="cursor:pointer;">
           <div class="team-member__name">John Moore</div>
           <div class="team-member__role">Board Advisor</div>
         </div>
       </div>
 
-      <!-- RIGHT DISPLAY -->
-      <div class="team-display fade-in">
-        <div class="team-card" id="team-card-liam">
-          <div class="team-card__photo"><img src="Liam Lloyd.jpeg" alt="Liam Lloyd" /></div>
-          <div class="team-card__content">
-            <h3 class="team-card__name">Liam Lloyd</h3>
-            <span class="role-badge role-badge--founder">Founder</span>
-            <p class="team-card__title">Lloyd &amp; Co.</p>
-            <p class="team-card__bio">A Finance and Economics student at Butler University and Microsoft Azure AI Fundamentals certified, Liam has built and deployed real automation systems inside active construction and real estate operations — reducing administrative labor by over 70% on documented projects. Before Lloyd &amp; Co., he founded Red Applications LLC, a software company serving K–12 schools, where he led a team of 8 and generated $20K in revenue before his sophomore year. Bilingual in English and Spanish. Based in Carmel, Indiana.</p>
+      <!-- RIGHT DISPLAY - FLIP CARD -->
+      <div class="team-flip-container fade-in">
+        <div class="team-flip-card" id="team-flip-card">
+          <!-- FRONT: Person Info -->
+          <div class="team-flip-front">
+            <div class="team-card__photo"><img src="Liam Lloyd.jpeg" alt="Liam Lloyd" id="card-photo" /></div>
+            <div class="team-card__content">
+              <h3 class="team-card__name" id="card-name">Liam Lloyd</h3>
+              <span class="role-badge role-badge--founder" id="card-role">Founder</span>
+              <p class="team-card__title" id="card-title">Lloyd &amp; Co.</p>
+              <p class="team-card__bio" id="card-bio">A Finance and Economics student at Butler University and Microsoft Azure AI Fundamentals certified, Liam has built and deployed real automation systems inside active construction and real estate operations — reducing administrative labor by over 70% on documented projects. Before Lloyd &amp; Co., he founded Red Applications LLC, a software company serving K–12 schools, where he led a team of 8 and generated $20K in revenue before his sophomore year. Bilingual in English and Spanish. Based in Carmel, Indiana.</p>
+            </div>
           </div>
-        </div>
-        <div class="team-card hidden" id="team-card-thomas">
-          <div class="team-card__photo"><img src="Thomas Lloyd.jpeg" alt="Thomas Lloyd" /></div>
-          <div class="team-card__content">
-            <h3 class="team-card__name">Thomas Lloyd</h3>
-            <span class="role-badge role-badge--advisor">Board Advisor</span>
-            <p class="team-card__title">CEO &amp; Founder, Top Mexico Real Estate</p>
-            <p class="team-card__bio">A Purdue University graduate operating in Mexico's real estate market since 1995 — the first person to obtain Mexico's nationally regulated real estate professional license. Built one of the leading international real estate platforms in the Riviera Maya, serving hundreds of U.S. and Canadian buyers. Decades of experience building and scaling real estate businesses internationally.</p>
-          </div>
-        </div>
-        <div class="team-card hidden" id="team-card-beatriz">
-          <div class="team-card__photo"><img src="Bea Lozano.png" alt="Beatriz Lozano" /></div>
-          <div class="team-card__content">
-            <h3 class="team-card__name">Beatriz Lozano</h3>
-            <span class="role-badge role-badge--advisor">Board Advisor</span>
-            <p class="team-card__title">Founder &amp; CEO, The Red Search</p>
-            <p class="team-card__bio">Systems Engineer with an MBA from ITAM. Architected the digital infrastructure and operational systems behind Top Mexico Real Estate's growth. Founded The Red Search to bring those same systems to other businesses. Deep expertise in technology strategy, business operations, and scalable digital workflows.</p>
-          </div>
-        </div>
-        <div class="team-card hidden" id="team-card-jason">
-          <div class="team-card__photo"><img src="Jason Stockrahm.jpg" alt="Jason Stockrahm" /></div>
-          <div class="team-card__content">
-            <h3 class="team-card__name">Jason Stockrahm</h3>
-            <span class="role-badge role-badge--advisor">Board Advisor</span>
-            <p class="team-card__title">VP, ENTRUST Solutions Group</p>
-            <p class="team-card__bio">Over 20 years in consulting, 13+ years leading large-scale engineering and operations projects across the U.S. Licensed Professional Engineer, Civil Engineering graduate of Valparaiso University. Joined ENTRUST when it was a 150-person firm and helped scale it into a national operation. Brings rigorous systems thinking and enterprise-level consulting expertise.</p>
-          </div>
-        </div>
-        <div class="team-card hidden" id="team-card-nick">
-          <div class="team-card__photo"><img src="Nick Smarrelli.jpg" alt="Nick Smarrelli" /></div>
-          <div class="team-card__content">
-            <h3 class="team-card__name">Nick Smarrelli</h3>
-            <span class="role-badge role-badge--advisor">Board Advisor</span>
-            <p class="team-card__title">CEO, GadellNet · Professor, Butler University</p>
-            <p class="team-card__bio">One of Indianapolis's most connected technology operators. Led GadellNet to the Inc. 5000 eight times. Named to IBJ's Forty Under 40. Founded Ryvit, a construction tech platform that raised $2M+. Professor of Entrepreneurship and Organizational Behavior at Butler University. Active investor and advisor through FivePeaks.</p>
-          </div>
-        </div>
-        <div class="team-card hidden" id="team-card-john">
-          <div class="team-card__photo"><img src="John Moore.jpeg" alt="John Moore" /></div>
-          <div class="team-card__content">
-            <h3 class="team-card__name">John Moore</h3>
-            <span class="role-badge role-badge--advisor">Board Advisor</span>
-            <p class="team-card__title">CEO, Moore Consulting</p>
-            <p class="team-card__bio">MBA from Saint Joseph's University, doctorate in progress at Ball State. CEO of Moore Consulting. Business Department Lead and Entrepreneurship teacher at Westfield Washington Schools — leads the Shark Tank Club and Rock Shop. Innovation Coach at STARTedUP Foundation. 13+ years of business development and sales leadership.</p>
+          <!-- BACK: Logo -->
+          <div class="team-flip-back">
+            <div class="team-flip-logo-container">
+              <img src="lloyd-co-logo-navy.png" alt="Lloyd & Co." class="team-flip-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <span class="team-flip-logo-text" style="display:none;font-size:2rem;font-weight:700;color:var(--navy);">Lloyd &amp; Co.</span>
+            </div>
           </div>
         </div>
       </div>
@@ -247,34 +212,94 @@ function automateSubmit() {
   document.querySelector(".automate-drawer__footer").innerHTML = "";
 }
 
-// Team member selection
+// Team member data
+const teamData = {
+  liam: {
+    name: "Liam Lloyd",
+    role: "role-badge--founder",
+    roleName: "Founder",
+    title: "Lloyd &amp; Co.",
+    bio: "A Finance and Economics student at Butler University and Microsoft Azure AI Fundamentals certified, Liam has built and deployed real automation systems inside active construction and real estate operations — reducing administrative labor by over 70% on documented projects. Before Lloyd &amp; Co., he founded Red Applications LLC, a software company serving K–12 schools, where he led a team of 8 and generated $20K in revenue before his sophomore year. Bilingual in English and Spanish. Based in Carmel, Indiana.",
+    photo: "Liam Lloyd.jpeg"
+  },
+  nick: {
+    name: "Nick Smarrelli",
+    role: "role-badge--advisor",
+    roleName: "Board Advisor",
+    title: "CEO, GadellNet · Professor, Butler University",
+    bio: "One of Indianapolis's most connected technology operators. Led GadellNet to the Inc. 5000 eight times. Named to IBJ's Forty Under 40. Founded Ryvit, a construction tech platform that raised $2M+. Professor of Entrepreneurship and Organizational Behavior at Butler University. Active investor and advisor through FivePeaks.",
+    photo: "Nick Smarrelli.jpg"
+  },
+  thomas: {
+    name: "Thomas Lloyd",
+    role: "role-badge--advisor",
+    roleName: "Board Advisor",
+    title: "CEO &amp; Founder, Top Mexico Real Estate",
+    bio: "A Purdue University graduate operating in Mexico's real estate market since 1995 — the first person to obtain Mexico's nationally regulated real estate professional license. Built one of the leading international real estate platforms in the Riviera Maya, serving hundreds of U.S. and Canadian buyers. Decades of experience building and scaling real estate businesses internationally.",
+    photo: "Thomas Lloyd.jpeg"
+  },
+  beatriz: {
+    name: "Beatriz Lozano",
+    role: "role-badge--advisor",
+    roleName: "Board Advisor",
+    title: "Founder &amp; CEO, The Red Search",
+    bio: "Systems Engineer with an MBA from ITAM. Architected the digital infrastructure and operational systems behind Top Mexico Real Estate's growth. Founded The Red Search to bring those same systems to other businesses. Deep expertise in technology strategy, business operations, and scalable digital workflows.",
+    photo: "Bea Lozano.png"
+  },
+  jason: {
+    name: "Jason Stockrahm",
+    role: "role-badge--advisor",
+    roleName: "Board Advisor",
+    title: "VP, ENTRUST Solutions Group",
+    bio: "Over 20 years in consulting, 13+ years leading large-scale engineering and operations projects across the U.S. Licensed Professional Engineer, Civil Engineering graduate of Valparaiso University. Joined ENTRUST when it was a 150-person firm and helped scale it into a national operation. Brings rigorous systems thinking and enterprise-level consulting expertise.",
+    photo: "Jason Stockrahm.jpg"
+  },
+  john: {
+    name: "John Moore",
+    role: "role-badge--advisor",
+    roleName: "Board Advisor",
+    title: "CEO, Moore Consulting",
+    bio: "MBA from Saint Joseph's University, doctorate in progress at Ball State. CEO of Moore Consulting. Business Department Lead and Entrepreneurship teacher at Westfield Washington Schools — leads the Shark Tank Club and Rock Shop. Innovation Coach at STARTedUP Foundation. 13+ years of business development and sales leadership.",
+    photo: "John Moore.jpeg"
+  }
+};
+
+// Handle team member clicks
 document.querySelectorAll(".team-member").forEach(member => {
   member.addEventListener("click", () => {
     const memberId = member.getAttribute("data-member");
+    const card = document.getElementById("team-flip-card");
+    const isFlipped = card.classList.contains("flipped");
 
-    // Remove active class from all members and cards
+    // Remove active from all members
     document.querySelectorAll(".team-member").forEach(m => m.classList.remove("active"));
-    document.querySelectorAll(".team-card").forEach(card => card.classList.remove("active"));
-
-    // Add active class to clicked member and corresponding card
     member.classList.add("active");
-    const card = document.getElementById(`team-card-${memberId}`);
-    if (card) {
-      card.classList.remove("hidden");
-      card.classList.add("active");
-    }
+
+    // Get team data
+    const data = teamData[memberId];
+    if (!data) return;
+
+    // Flip to back first
+    card.classList.add("flipped");
+
+    // After flip completes, update content
+    setTimeout(() => {
+      document.getElementById("card-photo").src = data.photo;
+      document.getElementById("card-name").textContent = data.name;
+      document.getElementById("card-role").textContent = data.roleName;
+      document.getElementById("card-role").className = `role-badge ${data.role}`;
+      document.getElementById("card-title").textContent = data.title;
+      document.getElementById("card-bio").textContent = data.bio;
+
+      // Flip back to front
+      card.classList.remove("flipped");
+    }, 325);
   });
 });
 
 // Initialize: set first member active
 window.addEventListener("DOMContentLoaded", () => {
-  const firstMember = document.querySelector(".team-member");
-  const liamCard = document.getElementById("team-card-liam");
-  if (firstMember) firstMember.classList.add("active");
-  if (liamCard) {
-    liamCard.classList.remove("hidden");
-    liamCard.classList.add("active");
-  }
+  document.querySelector(".team-member")?.classList.add("active");
 });
 </script>
 <script src="script.js"></script>
