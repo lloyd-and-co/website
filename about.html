@@ -269,7 +269,6 @@ document.querySelectorAll(".team-member").forEach(member => {
   member.addEventListener("click", () => {
     const memberId = member.getAttribute("data-member");
     const card = document.getElementById("team-flip-card");
-    const isFlipped = card.classList.contains("flipped");
 
     // Remove active from all members
     document.querySelectorAll(".team-member").forEach(m => m.classList.remove("active"));
@@ -279,21 +278,13 @@ document.querySelectorAll(".team-member").forEach(member => {
     const data = teamData[memberId];
     if (!data) return;
 
-    // Flip to back first
-    card.classList.add("flipped");
-
-    // After flip completes (halfway through 1.2s animation), update content
-    setTimeout(() => {
-      document.getElementById("card-photo").src = data.photo;
-      document.getElementById("card-name").textContent = data.name;
-      document.getElementById("card-role").textContent = data.roleName;
-      document.getElementById("card-role").className = `role-badge ${data.role}`;
-      document.getElementById("card-title").textContent = data.title;
-      document.getElementById("card-bio").textContent = data.bio;
-
-      // Flip back to front
-      card.classList.remove("flipped");
-    }, 600);
+    // Directly update content (no flip trick)
+    document.getElementById("card-photo").src = data.photo;
+    document.getElementById("card-name").textContent = data.name;
+    document.getElementById("card-role").textContent = data.roleName;
+    document.getElementById("card-role").className = `role-badge ${data.role}`;
+    document.getElementById("card-title").textContent = data.title;
+    document.getElementById("card-bio").textContent = data.bio;
   });
 });
 
