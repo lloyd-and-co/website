@@ -282,7 +282,7 @@ document.querySelectorAll(".team-member").forEach(member => {
     // Flip to back first
     card.classList.add("flipped");
 
-    // After flip completes, update content
+    // After flip completes (halfway through 1.2s animation), update content
     setTimeout(() => {
       document.getElementById("card-photo").src = data.photo;
       document.getElementById("card-name").textContent = data.name;
@@ -293,7 +293,7 @@ document.querySelectorAll(".team-member").forEach(member => {
 
       // Flip back to front
       card.classList.remove("flipped");
-    }, 325);
+    }, 600);
   });
 });
 
