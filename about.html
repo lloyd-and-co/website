@@ -252,22 +252,30 @@ document.querySelectorAll(".team-member").forEach(member => {
   member.addEventListener("click", () => {
     const memberId = member.getAttribute("data-member");
 
-    // Remove active class from all members
+    // Remove active class from all members and cards
     document.querySelectorAll(".team-member").forEach(m => m.classList.remove("active"));
-    member.classList.add("active");
-
-    // Hide all cards
     document.querySelectorAll(".team-card").forEach(card => card.classList.remove("active"));
 
-    // Show selected card
+    // Add active class to clicked member and corresponding card
+    member.classList.add("active");
     const card = document.getElementById(`team-card-${memberId}`);
-    if (card) card.classList.add("active");
+    if (card) {
+      card.classList.remove("hidden");
+      card.classList.add("active");
+    }
   });
 });
 
-// Set first member active on load
-document.querySelector(".team-member")?.classList.add("active");
-document.getElementById("team-card-liam")?.classList.add("active");
+// Initialize: set first member active
+window.addEventListener("DOMContentLoaded", () => {
+  const firstMember = document.querySelector(".team-member");
+  const liamCard = document.getElementById("team-card-liam");
+  if (firstMember) firstMember.classList.add("active");
+  if (liamCard) {
+    liamCard.classList.remove("hidden");
+    liamCard.classList.add("active");
+  }
+});
 </script>
 <script src="script.js"></script>
 </body>
