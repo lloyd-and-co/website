@@ -7,6 +7,16 @@ const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 /* ─── js-ready flag ─────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   document.documentElement.classList.add('js-ready');
+
+  // Fade out loading screen after 1.2 seconds
+  setTimeout(() => {
+    const loadingScreen = document.getElementById('loadingScreen');
+    if (loadingScreen) {
+      loadingScreen.classList.add('fade-out');
+      setTimeout(() => loadingScreen.remove(), 600);
+    }
+  }, 1200);
+
   initNav();
   initFadeIn();
   initBlueprintHero();
