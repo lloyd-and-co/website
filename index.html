@@ -660,14 +660,12 @@ function automateSubmit() {
     e.preventDefault();
     // Show success message
     document.getElementById('automateBody').innerHTML = `
-      <div class="automate-success">
-        <div class="automate-success__icon">✓</div>
-        <h3 class="automate-success__title">Request received</h3>
-        <p class="automate-success__text">We'll review your submission and get back to you soon. Thanks for reaching out!</p>
-        <button class="automate-success__button" onclick="document.getElementById('automateDrawer').classList.remove('open'); document.getElementById('automateBackdrop').classList.remove('open'); document.body.style.overflow = '';">Close</button>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem 1.5rem; height: 100%; gap: 0.5rem;">
+        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">✓</div>
+        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: #0D1B2A; margin: 0;">Thank you.</h3>
       </div>
     `;
-    document.querySelector('.automate-drawer__footer').style.display = 'none';
+    document.querySelector('.automate-drawer__footer').innerHTML = '';
 
     // Submit form via Formspree
     formspree('submit', this);
