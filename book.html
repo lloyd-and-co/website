@@ -24,8 +24,9 @@
     .calendly-container { background: #fff; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 20px 60px rgba(0,0,0,0.07); }
     .calendly-header { background: var(--navy); color: #fff; padding: 2.5rem; text-align: center; border-bottom: 1px solid rgba(0,0,0,0.1); }
     .calendly-header h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 700; margin: 0; letter-spacing: 0.02em; }
-    .calendly-widget { min-height: 900px; }
-    @media (max-width: 860px) { .calendly-widget { min-height: 800px; } }
+    .calendly-widget { min-height: 900px !important; height: 900px !important; }
+    .calendly-widget iframe { height: 900px !important; min-height: 900px !important; }
+    @media (max-width: 860px) { .calendly-widget { min-height: 800px !important; height: 800px !important; } .calendly-widget iframe { height: 800px !important; } }
   </style>
 </head>
 <body>
