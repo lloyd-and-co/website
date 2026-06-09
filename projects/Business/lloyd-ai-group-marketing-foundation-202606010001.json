@@ -1,0 +1,95 @@
+{
+  "id": "lloyd-ai-group-marketing-foundation-202606010001",
+  "name": "Lloyd AI Group — Marketing Foundation",
+  "workspace": "Business",
+  "category": "Marketing",
+  "description": "Build a professional marketing presence for Lloyd AI Group that generates credibility and inbound interest — starting with brand identity, website with lead-gen questionnaire, and LinkedIn outreach before any paid advertising.",
+  "status": "planning",
+  "createdAt": "2026-06-01",
+  "todos": [
+    {
+      "id": "1",
+      "task": "Define brand positioning: finalize one-liner, target niches, and tone of voice",
+      "completed": false,
+      "group": "Brand Identity"
+    },
+    {
+      "id": "2",
+      "task": "Design a simple logo and choose brand colors + typography (Canva or Looka)",
+      "completed": false,
+      "group": "Brand Identity"
+    },
+    {
+      "id": "3",
+      "task": "Choose website platform (Framer, Webflow, or Carrd) and set up domain",
+      "completed": false,
+      "group": "Website"
+    },
+    {
+      "id": "4",
+      "task": "Write all website copy — homepage, services, about, and CTA sections",
+      "completed": false,
+      "group": "Website"
+    },
+    {
+      "id": "5",
+      "task": "Build the AI Readiness Questionnaire (lead-gen form for business owners)",
+      "completed": false,
+      "group": "Website"
+    },
+    {
+      "id": "6",
+      "task": "Integrate Calendly booking link for free Audit calls",
+      "completed": false,
+      "group": "Website"
+    },
+    {
+      "id": "7",
+      "task": "Launch website and test all forms, links, and booking flow",
+      "completed": false,
+      "group": "Website"
+    },
+    {
+      "id": "8",
+      "task": "Optimize LinkedIn profile — headline, banner, about section, featured link to website",
+      "completed": false,
+      "group": "LinkedIn"
+    },
+    {
+      "id": "9",
+      "task": "Write 3 foundational LinkedIn posts establishing expertise and social proof",
+      "completed": false,
+      "group": "LinkedIn"
+    },
+    {
+      "id": "10",
+      "task": "Build a list of 50 target prospects in Carmel/Indianapolis (real estate, professional services, local service businesses)",
+      "completed": false,
+      "group": "LinkedIn"
+    },
+    {
+      "id": "11",
+      "task": "Write 3 personalized LinkedIn outreach message templates (connection request, follow-up, audit offer)",
+      "completed": false,
+      "group": "LinkedIn"
+    },
+    {
+      "id": "12",
+      "task": "Set up free CRM (HubSpot free tier) to track leads from questionnaire and outreach",
+      "completed": false,
+      "group": "Lead Generation"
+    },
+    {
+      "id": "13",
+      "task": "Write 3-email follow-up sequence for questionnaire leads",
+      "completed": false,
+      "group": "Lead Generation"
+    },
+    {
+      "id": "14",
+      "task": "Book and conduct first 3 Audit calls, document objections and common pain points",
+      "completed": false,
+      "group": "Lead Generation"
+    }
+  ]
+}

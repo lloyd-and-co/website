@@ -1,0 +1,77 @@
+{
+  "id": "lloyd-ai-group-sales-foundation-202606010001",
+  "name": "Lloyd AI Group — Sales Foundation",
+  "workspace": "Business",
+  "category": "Sales",
+  "description": "Build a repeatable direct outreach sales process to land Lloyd AI Group's first 3 clients, using a free AI Audit as the entry point and converting into paid implementation deals.",
+  "status": "planning",
+  "createdAt": "2026-06-01",
+  "todos": [
+    {
+      "id": "1",
+      "task": "Complete free AI Audit for Top Mexico Real Estate",
+      "completed": false,
+      "group": "Active Pipeline"
+    },
+    {
+      "id": "2",
+      "task": "Deliver AI Audit report to Top Mexico Real Estate and present findings",
+      "completed": false,
+      "group": "Active Pipeline"
+    },
+    {
+      "id": "3",
+      "task": "Send implementation upsell proposal to Top Mexico Real Estate",
+      "completed": false,
+      "group": "Active Pipeline"
+    },
+    {
+      "id": "4",
+      "task": "Build prospect list: 20 targets across real estate agents, professional services, and local service businesses in Carmel/Indianapolis",
+      "completed": false,
+      "group": "Prospecting"
+    },
+    {
+      "id": "5",
+      "task": "Send initial outreach to 10 prospects via email or LinkedIn DM",
+      "completed": false,
+      "group": "Prospecting"
+    },
+    {
+      "id": "6",
+      "task": "Send follow-up messages to non-responders at the 5-day mark",
+      "completed": false,
+      "group": "Prospecting"
+    },
+    {
+      "id": "7",
+      "task": "Book Audit discovery calls with at least 2 additional prospects",
+      "completed": false,
+      "group": "Prospecting"
+    },
+    {
+      "id": "8",
+      "task": "Set up outreach tracking spreadsheet: prospect name, channel, date contacted, follow-up date, status",
+      "completed": false,
+      "group": "Operations"
+    },
+    {
+      "id": "9",
+      "task": "Create a standard AI Audit delivery template (report format, sections, recommendations structure)",
+      "completed": false,
+      "group": "Operations"
+    },
+    {
+      "id": "10",
+      "task": "Define implementation service tiers and pricing to use in upsell conversations",
+      "completed": false,
+      "group": "Operations"
+    },
+    {
+      "id": "11",
+      "task": "Identify 2-3 local networking events or venues to pursue in-person outreach",
+      "completed": false,
+      "group": "Operations"
+    }
+  ]
+}

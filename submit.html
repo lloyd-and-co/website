@@ -271,8 +271,41 @@
 
 <script>
   window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
-  formspree('initForm', { formElement: '#automateForm', formId: 'mrevkgww' });
-  formspree('initForm', { formElement: '#submitJobForm', formId: 'mrevkgww' });
+  formspree('initForm', {
+    formElement: '#automateForm',
+    formId: 'mrevkgww',
+    onSubmit: function(e) {
+      document.getElementById('automateBody').style.display = 'none';
+      document.querySelector('.automate-drawer__footer').style.display = 'none';
+      const successHtml = `
+        <div class="automate-success">
+          <div class="automate-success__icon">✓</div>
+          <h3 class="automate-success__title">Request received</h3>
+          <p class="automate-success__text">We'll review your submission and get back to you soon. Thanks for reaching out!</p>
+          <button class="automate-success__button" onclick="document.getElementById('automateDrawer').classList.remove('open'); document.getElementById('automateBackdrop').classList.remove('open'); document.body.style.overflow = ''; location.reload();">Close</button>
+        </div>
+      `;
+      setTimeout(() => {
+        document.getElementById('automateBody').innerHTML = successHtml;
+        document.getElementById('automateBody').style.display = 'flex';
+      }, 300);
+    }
+  });
+  formspree('initForm', {
+    formElement: '#submitJobForm',
+    formId: 'mrevkgww',
+    onSubmit: function(e) {
+      const successHtml = `
+        <div class="success-msg">
+          <div class="success-msg__icon">✓</div>
+          <h2>Request received.</h2>
+          <p>We'll review your submission and get back to you soon. Thanks for reaching out!</p>
+          <a href="index.html" class="btn btn--outline">Back to Home</a>
+        </div>
+      `;
+      document.getElementById('formCard').innerHTML = successHtml;
+    }
+  });
 </script>
 <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 

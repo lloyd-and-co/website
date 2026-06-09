@@ -1,0 +1,83 @@
+{
+  "id": "lloyd-ai-finance-foundation-202606010001",
+  "name": "Lloyd AI Group — Finance Foundation",
+  "workspace": "Business",
+  "category": "Finance",
+  "description": "Build a complete financial foundation for Lloyd AI Group before the first client — invoicing system live, payment collection ready, and revenue + expense tracking in place.",
+  "status": "planning",
+  "createdAt": "2026-06-01",
+  "todos": [
+    {
+      "id": "1",
+      "task": "Choose and sign up for invoicing + payment tool (Wave recommended — free, supports Stripe/PayPal, has expense tracking)",
+      "completed": false,
+      "group": "Setup"
+    },
+    {
+      "id": "2",
+      "task": "Configure account with Lloyd AI Group branding (logo, business name, address, email)",
+      "completed": false,
+      "group": "Setup"
+    },
+    {
+      "id": "3",
+      "task": "Create invoice templates for each service tier: AI Audit ($0 / $297 / $497), AI Implementation ($2,000–$3,500), AI Retainer ($1,500/mo)",
+      "completed": false,
+      "group": "Setup"
+    },
+    {
+      "id": "4",
+      "task": "Connect payment processor (Stripe or PayPal) so clients can pay online via invoice link",
+      "completed": false,
+      "group": "Setup"
+    },
+    {
+      "id": "5",
+      "task": "Build revenue tracking spreadsheet: columns for client, service, invoice date, amount, paid date, status",
+      "completed": false,
+      "group": "Tracking"
+    },
+    {
+      "id": "6",
+      "task": "Set up expense tracking: categories for software, contractors, travel, marketing — log from day one",
+      "completed": false,
+      "group": "Tracking"
+    },
+    {
+      "id": "7",
+      "task": "Research solo business tax basics: quarterly estimated taxes (due dates), deductible expenses, whether to file as sole proprietor or LLC",
+      "completed": false,
+      "group": "Tax & Legal"
+    },
+    {
+      "id": "8",
+      "task": "Decide on business entity: evaluate sole proprietor vs. single-member LLC (liability protection, tax treatment, Indiana filing cost)",
+      "completed": false,
+      "group": "Tax & Legal"
+    },
+    {
+      "id": "9",
+      "task": "Open a dedicated business checking account to keep personal and business finances separate",
+      "completed": false,
+      "group": "Tax & Legal"
+    },
+    {
+      "id": "10",
+      "task": "Prepare engagement letter / scope of work for Top Mexico Real Estate (free AI Audit — document scope, deliverables, timeline)",
+      "completed": false,
+      "group": "First Client"
+    },
+    {
+      "id": "11",
+      "task": "Send $0 invoice or written confirmation to Top Mexico Real Estate to establish paper trail for first engagement",
+      "completed": false,
+      "group": "First Client"
+    },
+    {
+      "id": "12",
+      "task": "Define pricing escalation trigger: document the internal rule for when Audit price moves from $0 → $297 → $497",
+      "completed": false,
+      "group": "Pricing"
+    }
+  ]
+}
