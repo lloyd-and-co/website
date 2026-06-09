@@ -220,30 +220,28 @@
 </footer>
 
 
+<script src="https://unpkg.com/@formspree/ajax@1"></script>
 <script>
   window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
-  formspree('initForm', {
-    formElement: '#automateForm',
-    formId: 'mrevkgww',
-    onSubmit: function(e) {
-      document.getElementById('automateBody').style.display = 'none';
-      document.querySelector('.automate-drawer__footer').style.display = 'none';
-      const successHtml = `
-        <div class="automate-success">
-          <div class="automate-success__icon">✓</div>
-          <h3 class="automate-success__title">Request received</h3>
-          <p class="automate-success__text">We'll review your submission and get back to you soon. Thanks for reaching out!</p>
-          <button class="automate-success__button" onclick="document.getElementById('automateDrawer').classList.remove('open'); document.getElementById('automateBackdrop').classList.remove('open'); document.body.style.overflow = ''; location.reload();">Close</button>
-        </div>
-      `;
-      setTimeout(() => {
-        document.getElementById('automateBody').innerHTML = successHtml;
-        document.getElementById('automateBody').style.display = 'flex';
-      }, 300);
-    }
+  formspree('initForm', { formElement: '#automateForm', formId: 'mrevkgww' });
+
+  document.getElementById('automateForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // Show success message
+    document.getElementById('automateBody').innerHTML = `
+      <div class="automate-success">
+        <div class="automate-success__icon">✓</div>
+        <h3 class="automate-success__title">Request received</h3>
+        <p class="automate-success__text">We'll review your submission and get back to you soon. Thanks for reaching out!</p>
+        <button class="automate-success__button" onclick="document.getElementById('automateDrawer').classList.remove('open'); document.getElementById('automateBackdrop').classList.remove('open'); document.body.style.overflow = '';">Close</button>
+      </div>
+    `;
+    document.querySelector('.automate-drawer__footer').style.display = 'none';
+
+    // Submit form via Formspree
+    formspree('submit', this);
   });
 </script>
-<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 <script src="script.js"></script>
 </body>
 </html>
