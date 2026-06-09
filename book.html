@@ -20,6 +20,12 @@
     .stat-bar__item:last-child { border-right:none; }
     .stat-bar__num { font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;color:var(--navy);line-height:1;margin-bottom:0.35rem; }
     .stat-bar__label { font-size:0.83rem;color:var(--muted);line-height:1.5; }
+    .calendly-embed { max-width: 900px; margin: 0 auto; }
+    .calendly-container { background: #fff; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 20px 60px rgba(0,0,0,0.07); }
+    .calendly-header { background: var(--navy); color: #fff; padding: 2rem 2.5rem; text-align: center; border-bottom: 1px solid rgba(0,0,0,0.1); }
+    .calendly-header h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 700; margin: 0; letter-spacing: 0.02em; }
+    .calendly-widget { padding: 2rem; min-height: 700px; }
+    @media (max-width: 860px) { .calendly-widget { min-height: 600px; padding: 1.5rem; } }
   </style>
 </head>
 <body>
@@ -154,13 +160,13 @@
       <span class="section-label">Schedule Your Call</span>
       <h2 class="section-title">Let's find a time</h2>
     </div>
-    <div class="booking-box fade-in fade-in-delay-1">
-      <svg viewBox="0 0 24 24" style="width:44px;height:44px;stroke:#BFDBFE;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 1.25rem;">
-        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-      </svg>
-      <p>Online scheduling is coming soon. In the meantime, reach out directly — we typically respond within a few hours.</p>
-      <a href="mailto:liam@lloydco.xyz?subject=Free%20AI%20Audit%20Request&body=Hi%20Liam%2C%0A%0AI'd%20like%20to%20book%20a%20free%20AI%20Audit.%20Here%27s%20a%20bit%20about%20my%20business%3A%0A%0A" class="btn btn--primary btn--lg">Email to Book Your Call →</a>
-      <p style="font-size:0.84rem;color:var(--subtle);margin-top:1.25rem;margin-bottom:0;">Or write directly to <a href="mailto:liam@lloydco.xyz" style="color:var(--blue);">liam@lloydco.xyz</a></p>
+    <div class="calendly-embed fade-in fade-in-delay-1">
+      <div class="calendly-container">
+        <div class="calendly-header">
+          <h3>Pick a time that works for you</h3>
+        </div>
+        <div class="calendly-widget" data-url="https://calendly.com/liam-lloydco"></div>
+      </div>
     </div>
     <p class="reassurance fade-in fade-in-delay-2">No sales pressure. No 6-month contracts. If we're not the right fit, we'll tell you.</p>
   </div>
@@ -241,5 +247,20 @@
   });
 </script>
 <script src="script.js"></script>
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
+<script>
+  // Initialize Calendly embed
+  document.addEventListener('DOMContentLoaded', function() {
+    const calendlyWidget = document.querySelector('.calendly-widget');
+    if (calendlyWidget && window.Calendly) {
+      const url = calendlyWidget.getAttribute('data-url');
+      window.Calendly.initInlineWidget({
+        url: url,
+        parentElement: calendlyWidget,
+        prefill: {}
+      });
+    }
+  });
+</script>
 </body>
 </html>
