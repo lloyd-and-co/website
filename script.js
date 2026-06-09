@@ -120,13 +120,13 @@ function initWordSwap() {
   const wordEl = document.querySelector('.hero__word');
   if (!wordEl || reduced) return;
   const words = [
-    'real estate agents',
+    'real estate businesses',
     'construction firms',
-    'property managers',
+    'property management companies',
     'law firms',
     'independent contractors',
     'accounting firms',
-    'local operators'
+    'professional services'
   ];
   let idx = 0;
 
