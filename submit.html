@@ -81,15 +81,19 @@
     <button class="quiz-close-btn" id="automateClose" style="background:rgba(255,255,255,0.12);">✕</button>
   </div>
   <div class="automate-drawer__body" id="automateBody">
-    <div class="automate-promise"><strong>Here's how this works:</strong>Describe any task, process, or workflow you wish ran automatically. We review every submission personally — if it's something we can build, we'll reach back with good news. If it's outside our scope, we'll still respond with specific suggestions.</div>
-    <div class="automate-form-group"><label>Your name</label><input type="text" id="aName" placeholder="First and last name" /></div>
-    <div class="automate-form-group"><label>Your email</label><input type="email" id="aEmail" placeholder="you@yourbusiness.com" /></div>
-    <div class="automate-form-group"><label>What type of business?</label><select id="aIndustry"><option value="" disabled selected>Select your industry</option><option>Real Estate (Sales / Brokerage)</option><option>Real Estate (Property Management)</option><option>Residential Construction</option><option>Commercial Construction</option><option>Law Firm</option><option>Accounting / Financial Services</option><option>Independent Contractor / Trades</option><option>Med Spa / Healthcare</option><option>Other</option></select></div>
-    <div class="automate-form-group"><label>What do you want automated?</label><textarea id="aRequest" rows="5" placeholder="Describe the task, process, or problem…"></textarea></div>
+    <div class="automate-promise"><strong>Here's how this works:</strong> Describe any task, process, or workflow you wish ran automatically. We review every submission — if we can build it, we'll reach back with good news. If not, we'll still respond with specific suggestions.</div>
+    <form id="automateForm">
+      <div class="automate-form-group"><label>Your name</label><input type="text" name="name" placeholder="First and last name" required /></div>
+      <div class="automate-form-group"><label>Your email</label><input type="email" name="email" placeholder="you@yourbusiness.com" required /></div>
+      <div class="automate-form-group"><label>What industry are you in?</label><select name="industry" required><option value="">Select an industry</option><option value="real_estate">Real Estate</option><option value="construction">Construction</option><option value="law">Law</option><option value="accounting">Accounting</option><option value="contracting">Independent Contracting</option><option value="other">Other</option></select></div>
+      <div class="automate-form-group"><label>Tools you're currently using</label><input type="text" name="tools" placeholder="E.g., CRM, email, spreadsheets, etc." /></div>
+      <div class="automate-form-group"><label>What do you want automated?</label><textarea name="message" rows="5" placeholder="Describe the task or process…" required></textarea></div>
+      <div class="automate-form-group"><label>Hours per week spent on this task</label><input type="number" name="hours_per_week" placeholder="Approximate hours" min="0" /></div>
+    </form>
   </div>
   <div class="automate-drawer__footer">
     <p style="font-size:0.75rem;color:var(--subtle);margin-bottom:0.75rem;font-style:italic;">We respond to all submissions — even if the answer is 'not us.'</p>
-    <button class="btn btn--primary" style="width:100%;justify-content:center;" onclick="automateSubmit()">Submit My Request →</button>
+    <button type="submit" form="automateForm" class="btn btn--primary" style="width:100%;justify-content:center;">Submit My Request →</button>
   </div>
 </aside>
 
@@ -143,59 +147,51 @@
             <p>We review every request personally. If it's something we can build — we'll reach back with good news and a clear picture of what it would take. If it's outside our scope, we'll still respond with specific suggestions for what to do and who can help. Either way, you hear from us.</p>
           </div>
 
-          <div class="form-group">
-            <label for="sName">Your name *</label>
-            <input type="text" id="sName" placeholder="First and last name" autocomplete="name" />
-          </div>
+          <form id="submitJobForm">
+            <div class="form-group">
+              <label for="sName">Your name *</label>
+              <input type="text" id="sName" name="name" placeholder="First and last name" autocomplete="name" required />
+            </div>
 
-          <div class="form-group">
-            <label for="sEmail">Your email *</label>
-            <input type="email" id="sEmail" placeholder="you@yourbusiness.com" autocomplete="email" />
-          </div>
+            <div class="form-group">
+              <label for="sEmail">Your email *</label>
+              <input type="email" id="sEmail" name="email" placeholder="you@yourbusiness.com" autocomplete="email" required />
+            </div>
 
-          <div class="form-group">
-            <label for="sIndustry">What type of business are you running?</label>
-            <select id="sIndustry">
-              <option value="" disabled selected>Select your industry</option>
-              <option>Real Estate (Sales / Brokerage)</option>
-              <option>Real Estate (Property Management)</option>
-              <option>Residential Construction</option>
-              <option>Commercial Construction</option>
-              <option>Law Firm</option>
-              <option>Accounting / Financial Services</option>
-              <option>Independent Contractor / Trades</option>
-              <option>Med Spa / Healthcare</option>
-              <option>Other</option>
-            </select>
-          </div>
+            <div class="form-group">
+              <label for="sIndustry">What type of business are you running?</label>
+              <select id="sIndustry" name="industry" required>
+                <option value="">Select your industry</option>
+                <option value="real_estate">Real Estate</option>
+                <option value="construction">Construction</option>
+                <option value="law">Law</option>
+                <option value="accounting">Accounting</option>
+                <option value="contracting">Independent Contracting</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
 
-          <div class="form-group">
-            <label for="sTools">What tools does your team use? <span style="font-weight:400;color:var(--subtle);">(optional)</span></label>
-            <input type="text" id="sTools" placeholder="e.g. Buildertrend, QuickBooks, HubSpot, Excel…" />
-          </div>
+            <div class="form-group">
+              <label for="sTools">What tools does your team use? <span style="font-weight:400;color:var(--subtle);">(optional)</span></label>
+              <input type="text" id="sTools" name="tools" placeholder="e.g. Buildertrend, QuickBooks, HubSpot, Excel…" />
+            </div>
 
-          <div class="form-divider"></div>
+            <div class="form-divider"></div>
 
-          <div class="form-group">
-            <label for="sRequest">What do you want automated? *</label>
-            <textarea id="sRequest" rows="7" placeholder="Describe the task, process, or workflow. For example: 'Every time we get a new lead from our website, someone manually copies it into our CRM, sends an intro email, and adds a follow-up reminder. It takes about 20 minutes per lead and we get 15–20 a week…'"></textarea>
-            <p class="form-note">More detail helps us give you a more specific answer. But even a sentence is enough to start.</p>
-          </div>
+            <div class="form-group">
+              <label for="sRequest">What do you want automated? *</label>
+              <textarea id="sRequest" name="message" rows="7" placeholder="Describe the task, process, or workflow. For example: 'Every time we get a new lead from our website, someone manually copies it into our CRM, sends an intro email, and adds a follow-up reminder. It takes about 20 minutes per lead and we get 15–20 a week…'" required></textarea>
+              <p class="form-note">More detail helps us give you a more specific answer. But even a sentence is enough to start.</p>
+            </div>
 
-          <div class="form-group">
-            <label for="sHours">Roughly how many hours per week does this take right now? <span style="font-weight:400;color:var(--subtle);">(optional)</span></label>
-            <select id="sHours">
-              <option value="" disabled selected>Select a range</option>
-              <option>Less than 2 hours</option>
-              <option>2–5 hours</option>
-              <option>5–10 hours</option>
-              <option>More than 10 hours</option>
-              <option>Not sure</option>
-            </select>
-          </div>
+            <div class="form-group">
+              <label for="sHours">Roughly how many hours per week does this take right now? <span style="font-weight:400;color:var(--subtle);">(optional)</span></label>
+              <input type="number" id="sHours" name="hours_per_week" placeholder="Approximate hours" min="0" />
+            </div>
 
-          <button class="btn btn--primary btn--lg" style="width:100%;justify-content:center;margin-top:0.5rem;" onclick="submitJob()">Submit My Request →</button>
-          <p class="form-note" style="text-align:center;margin-top:1rem;">We respond to every submission — whether we can help or not.</p>
+            <button type="submit" class="btn btn--primary btn--lg" style="width:100%;justify-content:center;margin-top:0.5rem;">Submit My Request →</button>
+            <p class="form-note" style="text-align:center;margin-top:1rem;">We respond to every submission — whether we can help or not.</p>
+          </form>
         </div>
       </div>
 
@@ -274,29 +270,13 @@
 </footer>
 
 <script>
-function submitJob() {
-  const name    = document.getElementById('sName')?.value?.trim();
-  const email   = document.getElementById('sEmail')?.value?.trim();
-  const request = document.getElementById('sRequest')?.value?.trim();
-  if (!name || !email || !request) { alert('Please fill in your name, email, and describe what you want automated.'); return; }
-  document.getElementById('formCard').innerHTML = `
-    <div class="success-msg">
-      <div class="success-msg__icon">✓</div>
-      <h2>Request received.</h2>
-      <p>We'll review your submission and get back to you at <strong>${email}</strong>. Whether we can build it or not — you'll hear from us.</p>
-      <a href="index.html" class="btn btn--outline">Back to Home</a>
-    </div>`;
-}
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  formspree('initForm', { formElement: '#automateForm', formId: 'mrevkgww' });
+  formspree('initForm', { formElement: '#submitJobForm', formId: 'mrevkgww' });
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
-function automateSubmit() {
-  const name = document.getElementById('aName')?.value?.trim();
-  const email = document.getElementById('aEmail')?.value?.trim();
-  const request = document.getElementById('aRequest')?.value?.trim();
-  if (!name || !email || !request) { alert('Please fill in name, email, and describe what you want automated.'); return; }
-  document.getElementById('automateBody').innerHTML = `<div style="text-align:center;padding:2rem 0;"><div style="font-size:2.5rem;margin-bottom:1rem;">✓</div><h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--navy);margin-bottom:0.75rem;">Request received.</h3><p style="font-size:0.94rem;color:#334155;line-height:1.75;max-width:320px;margin:0 auto;">We'll review and get back to you at <strong>${email}</strong>.</p></div>`;
-  document.querySelector('.automate-drawer__footer').innerHTML = '';
-}
-
+<script>
 document.getElementById('quizTabBtn')?.addEventListener('click', () => {
   document.getElementById('quizDrawer').classList.add('open');
   document.getElementById('quizBackdrop').classList.add('open');

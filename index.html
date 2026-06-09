@@ -64,7 +64,7 @@
     </div>
     <button class="quiz-close-btn" id="automateClose" style="background:rgba(255,255,255,0.12);">✕</button>
   </div>
-  <div class="automate-drawer__body" id="automateBody">
+  <form class="automate-drawer__body" id="automateForm">
     <div class="automate-promise">
       <strong>Here's how this works:</strong>
       Describe any task, process, or workflow you wish ran automatically. We review every submission personally — if it's something we can build, we'll reach back with good news. If it's outside our scope, we'll still respond with specific suggestions for who can help. Either way, you hear from us.
@@ -72,17 +72,17 @@
 
     <div class="automate-form-group">
       <label for="aName">Your name</label>
-      <input type="text" id="aName" placeholder="First and last name" autocomplete="name" />
+      <input type="text" id="aName" name="name" placeholder="First and last name" required />
     </div>
 
     <div class="automate-form-group">
       <label for="aEmail">Your email</label>
-      <input type="email" id="aEmail" placeholder="you@yourbusiness.com" autocomplete="email" />
+      <input type="email" id="aEmail" name="email" placeholder="you@yourbusiness.com" required />
     </div>
 
     <div class="automate-form-group">
       <label for="aIndustry">What type of business?</label>
-      <select id="aIndustry">
+      <select id="aIndustry" name="industry" required>
         <option value="" disabled selected>Select your industry</option>
         <option>Real Estate (Sales / Brokerage)</option>
         <option>Real Estate (Property Management)</option>
@@ -97,13 +97,30 @@
     </div>
 
     <div class="automate-form-group">
-      <label for="aRequest">What do you want automated?</label>
-      <textarea id="aRequest" placeholder="Describe the task, process, or problem in as much or as little detail as you want. E.g. 'Every time we get a new lead from our website, someone has to manually copy it into our CRM and send a follow-up email…'" rows="6"></textarea>
+      <label for="aTools">What tools does your team use?</label>
+      <input type="text" id="aTools" name="tools" placeholder="e.g. Buildertrend, QuickBooks, HubSpot, Excel…" />
     </div>
-  </div>
+
+    <div class="automate-form-group">
+      <label for="aRequest">What do you want automated?</label>
+      <textarea id="aRequest" name="message" placeholder="Describe the task, process, or problem in as much or as little detail as you want. E.g. 'Every time we get a new lead from our website, someone has to manually copy it into our CRM and send a follow-up email…'" rows="6" required></textarea>
+    </div>
+
+    <div class="automate-form-group">
+      <label for="aHours">Roughly how many hours per week?</label>
+      <select id="aHours" name="hours_per_week">
+        <option value="">Select a range</option>
+        <option>Less than 2 hours</option>
+        <option>2–5 hours</option>
+        <option>5–10 hours</option>
+        <option>More than 10 hours</option>
+        <option>Not sure</option>
+      </select>
+    </div>
+  </form>
   <div class="automate-drawer__footer">
     <p style="font-size:0.75rem;color:var(--subtle);margin-bottom:0.75rem;font-style:italic;">We review every request and respond to all of them — even if the answer is 'not us, but here's who.'</p>
-    <button class="btn btn--primary" style="width:100%;justify-content:center;" onclick="automateSubmit()">Submit My Request →</button>
+    <button class="btn btn--primary" style="width:100%;justify-content:center;" type="submit" form="automateForm">Submit My Request →</button>
   </div>
 </aside>
 
@@ -634,6 +651,11 @@ function automateSubmit() {
     </div>`;
 }
 </script>
+<script>
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  formspree('initForm', { formElement: '#automateForm', formId: 'mrevkgww' });
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 <script src="script.js"></script>
 </body>
 </html>

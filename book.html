@@ -74,13 +74,18 @@
   </div>
   <div class="automate-drawer__body" id="automateBody">
     <div class="automate-promise"><strong>Here's how this works:</strong> Describe any task, process, or workflow you wish ran automatically. We review every submission — if we can build it, we'll reach back with good news. If not, we'll still respond with specific suggestions.</div>
-    <div class="automate-form-group"><label>Your name</label><input type="text" id="aName" placeholder="First and last name" /></div>
-    <div class="automate-form-group"><label>Your email</label><input type="email" id="aEmail" placeholder="you@yourbusiness.com" /></div>
-    <div class="automate-form-group"><label>What do you want automated?</label><textarea id="aRequest" rows="5" placeholder="Describe the task or process…"></textarea></div>
+    <form id="automateForm">
+      <div class="automate-form-group"><label>Your name</label><input type="text" name="name" placeholder="First and last name" required /></div>
+      <div class="automate-form-group"><label>Your email</label><input type="email" name="email" placeholder="you@yourbusiness.com" required /></div>
+      <div class="automate-form-group"><label>What industry are you in?</label><select name="industry" required><option value="">Select an industry</option><option value="real_estate">Real Estate</option><option value="construction">Construction</option><option value="law">Law</option><option value="accounting">Accounting</option><option value="contracting">Independent Contracting</option><option value="other">Other</option></select></div>
+      <div class="automate-form-group"><label>Tools you're currently using</label><input type="text" name="tools" placeholder="E.g., CRM, email, spreadsheets, etc." /></div>
+      <div class="automate-form-group"><label>What do you want automated?</label><textarea name="message" rows="5" placeholder="Describe the task or process…" required></textarea></div>
+      <div class="automate-form-group"><label>Hours per week spent on this task</label><input type="number" name="hours_per_week" placeholder="Approximate hours" min="0" /></div>
+    </form>
   </div>
   <div class="automate-drawer__footer">
     <p style="font-size:0.75rem;color:var(--subtle);margin-bottom:0.75rem;font-style:italic;">We respond to all submissions — even if the answer is 'not us.'</p>
-    <button class="btn btn--primary" style="width:100%;justify-content:center;" onclick="automateSubmit()">Submit My Request →</button>
+    <button type="submit" form="automateForm" class="btn btn--primary" style="width:100%;justify-content:center;">Submit My Request →</button>
   </div>
 </aside>
 
@@ -216,15 +221,10 @@
 
 
 <script>
-function automateSubmit() {
-  const name = document.getElementById('aName')?.value?.trim();
-  const email = document.getElementById('aEmail')?.value?.trim();
-  const request = document.getElementById('aRequest')?.value?.trim();
-  if (!name || !email || !request) { alert('Please fill in name, email, and what you want automated.'); return; }
-  document.getElementById('automateBody').innerHTML = `<div style="text-align:center;padding:2rem 0;"><div style="font-size:2.5rem;margin-bottom:1rem;">✓</div><h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--navy);margin-bottom:0.75rem;">Request received.</h3><p style="font-size:0.92rem;color:#334155;line-height:1.75;">We'll review and get back to you at <strong>${email}</strong>.</p></div>`;
-  document.querySelector('.automate-drawer__footer').innerHTML = '';
-}
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  formspree('initForm', { formElement: '#automateForm', formId: 'mrevkgww' });
 </script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 <script src="script.js"></script>
 </body>
 </html>

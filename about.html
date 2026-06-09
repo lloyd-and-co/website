@@ -57,15 +57,18 @@
     <div><div class="automate-drawer__title">Automate This</div><div class="automate-drawer__sub">Describe the process. We'll tell you if we can build it.</div></div>
     <button class="quiz-close-btn" id="automateClose" style="background:rgba(255,255,255,0.12);">✕</button>
   </div>
-  <div class="automate-drawer__body" id="automateBody">
+  <form class="automate-drawer__body" id="automateForm">
     <div class="automate-promise"><strong>Here's how this works:</strong> Describe any task, process, or workflow you wish ran automatically. We review every submission — if we can build it, we'll reach back with good news. If not, we'll still respond with specific suggestions.</div>
-    <div class="automate-form-group"><label>Your name</label><input type="text" id="aName" placeholder="First and last name" /></div>
-    <div class="automate-form-group"><label>Your email</label><input type="email" id="aEmail" placeholder="you@yourbusiness.com" /></div>
-    <div class="automate-form-group"><label>What do you want automated?</label><textarea id="aRequest" rows="5" placeholder="Describe the task or process…"></textarea></div>
-  </div>
+    <div class="automate-form-group"><label>Your name</label><input type="text" id="aName" name="name" placeholder="First and last name" required /></div>
+    <div class="automate-form-group"><label>Your email</label><input type="email" id="aEmail" name="email" placeholder="you@yourbusiness.com" required /></div>
+    <div class="automate-form-group"><label>What type of business?</label><select id="aIndustry" name="industry" required><option value="" disabled selected>Select your industry</option><option>Real Estate (Sales / Brokerage)</option><option>Real Estate (Property Management)</option><option>Residential Construction</option><option>Commercial Construction</option><option>Law Firm</option><option>Accounting / Financial Services</option><option>Independent Contractor / Trades</option><option>Med Spa / Healthcare</option><option>Other</option></select></div>
+    <div class="automate-form-group"><label>What tools does your team use?</label><input type="text" id="aTools" name="tools" placeholder="e.g. Buildertrend, QuickBooks, HubSpot…" /></div>
+    <div class="automate-form-group"><label>What do you want automated?</label><textarea id="aRequest" name="message" rows="5" placeholder="Describe the task or process…" required></textarea></div>
+    <div class="automate-form-group"><label>Roughly how many hours per week?</label><select id="aHours" name="hours_per_week"><option value="">Select a range</option><option>Less than 2 hours</option><option>2–5 hours</option><option>5–10 hours</option><option>More than 10 hours</option><option>Not sure</option></select></div>
+  </form>
   <div class="automate-drawer__footer">
     <p style="font-size:0.75rem;color:var(--subtle);margin-bottom:0.75rem;font-style:italic;">We respond to all submissions — even if the answer is 'not us.'</p>
-    <button class="btn btn--primary" style="width:100%;justify-content:center;" onclick="automateSubmit()">Submit My Request →</button>
+    <button class="btn btn--primary" style="width:100%;justify-content:center;" type="submit" form="automateForm">Submit My Request →</button>
   </div>
 </aside>
 
@@ -276,14 +279,10 @@
 </footer>
 
 <script>
-function automateSubmit() {
-  const name = document.getElementById("aName")?.value?.trim();
-  const email = document.getElementById("aEmail")?.value?.trim();
-  const request = document.getElementById("aRequest")?.value?.trim();
-  if (!name || !email || !request) { alert("Please fill in name, email, and what you want automated."); return; }
-  document.getElementById("automateBody").innerHTML = `<div style="text-align:center;padding:2rem 0;"><div style="font-size:2.5rem;margin-bottom:1rem;">✓</div><h3 style="font-family:Cormorant Garamond,serif;font-size:1.4rem;font-weight:700;color:var(--navy);margin-bottom:0.75rem;">Request received.</h3><p style="font-size:0.92rem;color:#334155;line-height:1.75;">We will review and get back to you at <strong>${email}</strong>.</p></div>`;
-  document.querySelector(".automate-drawer__footer").innerHTML = "";
-}
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  formspree('initForm', { formElement: '#automateForm', formId: 'mrevkgww' });
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
 // Flip cards on hover and click (mobile)
 document.querySelectorAll(".flip-card").forEach(card => {
