@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How We Work — Lloyd & Co. AI Automation Consulting</title>
+  <meta name="description" content="Three ways Lloyd & Co. takes on work: a tool your team runs, an agent that does the task and hands you the result, or tell us what's broken and we'll figure out the right fix." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-screen__content">
+    <img src="lloyd-co-logo-navy.png" alt="Lloyd & Co." class="loading-screen__logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+    <span class="loading-screen__text" style="display:none;">Lloyd &amp; Co.</span>
+    <div class="loading-screen__spinner"></div>
+  </div>
+</div>
+
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- ═══ SIDE TABS ══════════════════════════════════════════════ -->
+<div class="side-tabs">
+  <button class="side-tab" id="quizTabBtn" aria-label="AI Readiness Quiz">
+    <span class="side-tab__icon">⚡</span> Am I a fit? →
+  </button>
+  <button class="side-tab side-tab--automate" id="automateTab" aria-label="Submit an automation request">
+    <span class="side-tab__icon">🔧</span> Automate This →
+  </button>
+</div>
+
+<!-- ═══ QUIZ DRAWER ════════════════════════════════════════════ -->
+<div class="quiz-backdrop" id="quizBackdrop"></div>
+<aside class="quiz-drawer" id="quizDrawer" role="dialog" aria-modal="true" aria-label="AI Readiness Quiz">
+  <div class="quiz-drawer__header">
+    <span class="quiz-drawer__title">AI Readiness Quiz</span>
+    <button class="quiz-close-btn" id="quizClose">✕</button>
+  </div>
+  <div class="quiz-beam-wrap">
+    <div class="quiz-beam-label"><span>Progress</span><span id="beamLabel">0 / 6</span></div>
+    <div class="quiz-beam-track">
+      <div class="quiz-beam-seg"></div><div class="quiz-beam-seg"></div>
+      <div class="quiz-beam-seg"></div><div class="quiz-beam-seg"></div>
+      <div class="quiz-beam-seg"></div><div class="quiz-beam-seg"></div>
+    </div>
+  </div>
+  <div class="quiz-drawer__body" id="quizBody">
+    <p style="color:var(--muted);font-size:0.95rem;line-height:1.7;">Find out if AI can save your business 10+ hours a week. 6 quick questions.</p>
+  </div>
+  <div class="quiz-drawer__footer" id="quizFooter">
+    <button class="btn btn--primary" onclick="renderQ()">Start Quiz →</button>
+  </div>
+</aside>
+
+<!-- ═══ AUTOMATE DRAWER ════════════════════════════════════════ -->
+<div class="quiz-backdrop" id="automateBackdrop"></div>
+<aside class="automate-drawer" id="automateDrawer" role="dialog" aria-modal="true" aria-label="Submit an automation request">
+  <div class="automate-drawer__header">
+    <div>
+      <div class="automate-drawer__title">Automate This</div>
+      <div class="automate-drawer__sub">Describe the process. We'll tell you if we can build it.</div>
+    </div>
+    <button class="quiz-close-btn" id="automateClose" style="background:rgba(255,255,255,0.12);">✕</button>
+  </div>
+  <form class="automate-drawer__body" id="automateForm">
+    <div class="automate-promise">
+      <strong>Here's how this works:</strong>
+      Describe any task, process, or workflow you wish ran automatically. We review every submission personally — if it's something we can build, we'll reach back with good news. If it's outside our scope, we'll still respond with specific suggestions for who can help. Either way, you hear from us.
+    </div>
+    <div class="automate-form-group">
+      <label for="aName">Your name</label>
+      <input type="text" id="aName" name="name" placeholder="First and last name" required />
+    </div>
+    <div class="automate-form-group">
+      <label for="aEmail">Your email</label>
+      <input type="email" id="aEmail" name="email" placeholder="you@yourbusiness.com" required />
+    </div>
+    <div class="automate-form-group">
+      <label for="aIndustry">What type of business?</label>
+      <select id="aIndustry" name="industry" required>
+        <option value="" disabled selected>Select your industry</option>
+        <option>Real Estate (Sales / Brokerage)</option>
+        <option>Real Estate (Property Management)</option>
+        <option>Residential Construction</option>
+        <option>Commercial Construction</option>
+        <option>Law Firm</option>
+        <option>Accounting / Financial Services</option>
+        <option>Independent Contractor / Trades</option>
+        <option>Med Spa / Healthcare</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="automate-form-group">
+      <label for="aTools">What tools does your team use?</label>
+      <input type="text" id="aTools" name="tools" placeholder="e.g. Buildertrend, QuickBooks, HubSpot, Excel…" />
+    </div>
+    <div class="automate-form-group">
+      <label for="aRequest">What do you want automated?</label>
+      <textarea id="aRequest" name="message" placeholder="Describe the task, process, or problem in as much or as little detail as you want." rows="6" required></textarea>
+    </div>
+    <div class="automate-form-group">
+      <label for="aHours">Roughly how many hours per week?</label>
+      <select id="aHours" name="hours_per_week">
+        <option value="">Select a range</option>
+        <option>Less than 2 hours</option>
+        <option>2–5 hours</option>
+        <option>5–10 hours</option>
+        <option>More than 10 hours</option>
+        <option>Not sure</option>
+      </select>
+    </div>
+  </form>
+  <div class="automate-drawer__footer">
+    <button class="btn btn--primary" style="width:100%;justify-content:center;" type="submit" form="automateForm">Submit My Request →</button>
+  </div>
+</aside>
+
+<!-- ═══ NAV ════════════════════════════════════════════════════ -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <img src="lloyd-co-logo-navy.png" alt="Lloyd & Co." onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+      <span class="nav__logo-text" style="display:none;">Lloyd &amp; Co.</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="how-we-work.html" class="active">How We Work</a></li>
+      <li><a href="submit.html">Submit a Job</a></li>
+      <li><a href="book.html">Book a Call</a></li>
+    </ul>
+    <a href="book.html" class="btn btn--primary nav__cta">Book Free Audit</a>
+    <button class="nav__hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav__mobile" id="mobileNav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="how-we-work.html">How We Work</a>
+    <a href="submit.html">Submit a Job</a>
+    <a href="book.html">Book a Call</a>
+    <a href="book.html" class="btn btn--primary" style="text-align:center;">Book Free Audit</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══════════════════════════════════════════════════ -->
+<section class="hero" style="min-height:52vh;padding:5rem 0 4rem;">
+  <svg id="blueprint-svg" aria-hidden="true"></svg>
+  <div class="hero__content container">
+    <div class="hero__badge">HOW WE WORK</div>
+    <h1 class="hero__title" style="font-size:clamp(2.2rem,4.5vw,3.6rem);">
+      We work three ways.<br><em>Pick the one that fits.</em>
+    </h1>
+    <p class="hero__sub" style="max-width:600px;margin:0 auto;">
+      Some clients want a tool their team runs forever. Some want an agent that just does the work and reports back. Some don't know what they need yet — they just know something's broken. All three are on the table.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ THREE CARDS ════════════════════════════════════════════ -->
+<section class="section" style="background:#fff;">
+  <div class="container">
+
+    <div class="cflow-outer" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.75rem;perspective:none;transform:none;">
+
+      <!-- Card 1: A Tool -->
+      <div class="cflow-card" style="transform:none;opacity:1;position:relative;display:flex;flex-direction:column;">
+        <div style="font-size:2rem;margin-bottom:1rem;">⬜</div>
+        <span class="cs-tag">A Tool For Your Team</span>
+        <h3 class="cs-title" style="margin-top:0.5rem;">Something your team opens and uses — every day, on their own.</h3>
+        <p style="color:var(--muted);font-size:0.95rem;line-height:1.75;margin:1rem 0;">An app, a dashboard, an Excel model, a client portal — whatever shape fits the problem. We build it from scratch, wire it into the tools you already use, and hand it off. It's yours. Your team drives it.</p>
+        <p style="font-style:italic;font-size:0.9rem;color:#334155;line-height:1.7;margin-bottom:1rem;border-left:3px solid var(--navy);padding-left:0.85rem;">"Like the Client Selections Portal we built for a design-build firm — a 2,944-product wizard their team now runs in every meeting."</p>
+        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1.25rem;"><strong>Best for:</strong> Teams that want control in their own hands.</p>
+        <a href="index.html#case-studies" class="cs-link" style="margin-top:auto;font-weight:600;color:var(--navy);text-decoration:none;">See tools we've built &nbsp;→</a>
+      </div>
+
+      <!-- Card 2: An Agent -->
+      <div class="cflow-card" style="transform:none;opacity:1;position:relative;display:flex;flex-direction:column;">
+        <div style="font-size:2rem;margin-bottom:1rem;">🕐</div>
+        <span class="cs-tag">An Agent That Works For You</span>
+        <h3 class="cs-title" style="margin-top:0.5rem;">Not a tool you use — something that does the task and hands you the result.</h3>
+        <p style="color:var(--muted);font-size:0.95rem;line-height:1.75;margin:1rem 0;">Think of it like hiring for one job, minus the hiring. The agent runs on its own schedule — daily, weekly, whenever the trigger fires — and you get the output: a report, a follow-up sent, a schedule updated, a lead worked. You don't log in and do anything. It just happens.</p>
+        <p style="font-style:italic;font-size:0.9rem;color:#334155;line-height:1.7;margin-bottom:1rem;border-left:3px solid var(--navy);padding-left:0.85rem;">"Like the subcontractor dispatch agent that handles scheduling overnight, or the Monday-morning ops digest that's in your inbox before you're at your desk."</p>
+        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1.25rem;"><strong>Best for:</strong> Teams that want the work gone, not new software to learn.</p>
+        <a href="index.html#case-studies" class="cs-link" style="margin-top:auto;font-weight:600;color:var(--navy);text-decoration:none;">See agents we've built &nbsp;→</a>
+      </div>
+
+      <!-- Card 3: Open Problem -->
+      <div class="cflow-card" style="transform:none;opacity:1;position:relative;display:flex;flex-direction:column;">
+        <div style="font-size:2rem;margin-bottom:1rem;">💬</div>
+        <span class="cs-tag">Tell Us What's Broken</span>
+        <h3 class="cs-title" style="margin-top:0.5rem;">Don't know if it's a tool, an agent, or something else? That's our job to figure out — not yours.</h3>
+        <p style="color:var(--muted);font-size:0.95rem;line-height:1.75;margin:1rem 0;">Describe the actual pain. We'll tell you straight whether AI can fix it, and if so, what that looks like. If it's not a fit, we'll say that too, and point you somewhere that can help. No guessing on your end, no overselling on ours.</p>
+        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1.25rem;"><strong>Best for:</strong> Anyone who isn't sure yet.</p>
+        <a href="#" onclick="document.getElementById('automateTab').click();return false;" class="cs-link" style="margin-top:auto;font-weight:600;color:var(--navy);text-decoration:none;">Submit a Job &nbsp;→</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CLOSING ═════════════════════════════════════════════════ -->
+<section class="cta-dark">
+  <div class="container fade-in" style="text-align:center;">
+    <p style="font-size:1.15rem;color:rgba(255,255,255,0.85);margin-bottom:1.25rem;">Still not sure which lane you're in? That's what the free audit is for.</p>
+    <a href="book.html" class="btn btn--blue btn--lg">Book Your Free AI Audit →</a>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ══════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__logo"><img src="lloyd-co-logo-transparent.png" alt="Lloyd & Co." style="height:50px;width:auto;" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" /><span class="footer__logo-text" style="display:none;">Lloyd &amp; Co.</span></div>
+        <p class="footer__tagline">AI automation consulting for real estate, construction, and professional services operators in Indianapolis and beyond.</p>
+      </div>
+      <div>
+        <p class="footer__heading">Navigation</p>
+        <ul class="footer__links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="how-we-work.html">How We Work</a></li>
+          <li><a href="submit.html">Submit a Job</a></li>
+          <li><a href="book.html">Book a Call</a></li>
+        </ul>
+      </div>
+      <div class="footer__contact">
+        <p class="footer__heading">Contact</p>
+        <p>Carmel, Indiana</p>
+        <p><a href="mailto:liam@lloydco.xyz">liam@lloydco.xyz</a></p>
+        <p style="margin-top:0.75rem;"><a href="https://www.linkedin.com/company/lloyd-ai-group" target="_blank" rel="noopener noreferrer" style="color:#334155;">LinkedIn ↗</a></p>
+      </div>
+    </div>
+    <hr class="footer__divider" />
+    <div class="footer__bottom">
+      <span>&copy; 2026 Lloyd &amp; Co. All rights reserved.</span>
+      <span style="color:#1E3A5F;">Carmel, Indiana</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('quizTabBtn')?.addEventListener('click', () => {
+  document.getElementById('quizDrawer').classList.add('open');
+  document.getElementById('quizBackdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  renderQ();
+});
+document.getElementById('quizClose')?.addEventListener('click', () => {
+  document.getElementById('quizDrawer').classList.remove('open');
+  document.getElementById('quizBackdrop').classList.remove('open');
+  document.body.style.overflow = '';
+});
+document.getElementById('quizBackdrop')?.addEventListener('click', () => {
+  document.getElementById('quizDrawer').classList.remove('open');
+  document.getElementById('quizBackdrop').classList.remove('open');
+  document.body.style.overflow = '';
+});
+
+document.getElementById('automateForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  this.innerHTML = `
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 1.5rem;height:100%;gap:0.5rem;">
+      <div style="font-size:2.5rem;margin-bottom:0.5rem;">✓</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:#0D1B2A;margin:0;">Thank you.</h3>
+    </div>
+  `;
+  document.querySelector('.automate-drawer__footer').innerHTML = '';
+  formspree('submit', this);
+});
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1"></script>
+<script>
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  formspree('initForm', { formElement: '#automateForm', formId: 'mrevkgww' });
+</script>
+<script src="script.js"></script>
+</body>
+</html>
