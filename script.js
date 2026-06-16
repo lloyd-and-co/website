@@ -111,7 +111,9 @@ function initBlueprintHero() {
   if (content) {
     content.style.opacity = '0';
     content.style.transition = 'opacity 0.8s ease';
-    setTimeout(() => { content.style.opacity = '1'; }, 1400);
+    // Home page: wait for blueprint grid to draw. Other pages: show sooner.
+    const delay = document.querySelector('.hero__word') ? 1400 : 600;
+    setTimeout(() => { content.style.opacity = '1'; }, delay);
   }
 }
 
@@ -190,7 +192,7 @@ function initCoverflow() {
   function stopTimer()  { clearInterval(timer); }
   outer?.addEventListener('mouseenter', stopTimer);
   outer?.addEventListener('mouseleave', startTimer);
-  startTimer();
+  // Autoplay disabled — manual navigation only
 
   // Touch/swipe
   let touchStartX = 0;

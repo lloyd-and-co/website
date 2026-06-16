@@ -141,7 +141,7 @@ body::after {
   background: #E8ECF0; border: 1px solid #C5CDD6;
   padding: 0.28rem 0.9rem; border-radius: 100px; margin-bottom: 0.9rem;
 }
-.section-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; margin-bottom: 1rem; }
+.section-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; margin-bottom: 1rem; scroll-margin-top: 90px; }
 .section-sub { font-size: 1.05rem; color: var(--muted); max-width: 580px; line-height: 1.75; }
 
 /* ─── Diagonal Dividers ──────────────────────────────────────── */

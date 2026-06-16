@@ -81,11 +81,11 @@
     <button class="quiz-close-btn" id="automateClose" style="background:rgba(255,255,255,0.12);">✕</button>
   </div>
   <div class="automate-drawer__body" id="automateBody">
-    <div class="automate-promise"><strong>Here's how this works:</strong> Describe any task, process, or workflow you wish ran automatically. We review every submission — if we can build it, we'll reach back with good news. If not, we'll still respond with specific suggestions.</div>
+    <div class="automate-promise"><strong>Here's how this works:</strong> Describe any task, process, or workflow you wish ran automatically. We review every submission personally — if it's something we can build, we'll reach back with good news. If it's outside our scope, we'll still respond with specific suggestions for who can help. Either way, you hear from us.</div>
     <form id="automateForm">
       <div class="automate-form-group"><label>Your name</label><input type="text" name="name" placeholder="First and last name" required /></div>
       <div class="automate-form-group"><label>Your email</label><input type="email" name="email" placeholder="you@yourbusiness.com" required /></div>
-      <div class="automate-form-group"><label>What industry are you in?</label><select name="industry" required><option value="">Select an industry</option><option value="real_estate">Real Estate</option><option value="construction">Construction</option><option value="law">Law</option><option value="accounting">Accounting</option><option value="contracting">Independent Contracting</option><option value="other">Other</option></select></div>
+      <div class="automate-form-group"><label>What type of business?</label><select name="industry" required><option value="" disabled selected>Select your industry</option><option>Real Estate (Sales / Brokerage)</option><option>Real Estate (Property Management)</option><option>Residential Construction</option><option>Commercial Construction</option><option>Law Firm</option><option>Accounting / Financial Services</option><option>Independent Contractor / Trades</option><option>Med Spa / Healthcare</option><option>Other</option></select></div>
       <div class="automate-form-group"><label>Tools you're currently using</label><input type="text" name="tools" placeholder="E.g., CRM, email, spreadsheets, etc." /></div>
       <div class="automate-form-group"><label>What do you want automated?</label><textarea name="message" rows="5" placeholder="Describe the task or process…" required></textarea></div>
       <div class="automate-form-group"><label>Hours per week spent on this task</label><input type="number" name="hours_per_week" placeholder="Approximate hours" min="0" /></div>
@@ -162,13 +162,16 @@
             <div class="form-group">
               <label for="sIndustry">What type of business are you running?</label>
               <select id="sIndustry" name="industry" required>
-                <option value="">Select your industry</option>
-                <option value="real_estate">Real Estate</option>
-                <option value="construction">Construction</option>
-                <option value="law">Law</option>
-                <option value="accounting">Accounting</option>
-                <option value="contracting">Independent Contracting</option>
-                <option value="other">Other</option>
+                <option value="" disabled selected>Select your industry</option>
+                <option>Real Estate (Sales / Brokerage)</option>
+                <option>Real Estate (Property Management)</option>
+                <option>Residential Construction</option>
+                <option>Commercial Construction</option>
+                <option>Law Firm</option>
+                <option>Accounting / Financial Services</option>
+                <option>Independent Contractor / Trades</option>
+                <option>Med Spa / Healthcare</option>
+                <option>Other</option>
               </select>
             </div>
 
